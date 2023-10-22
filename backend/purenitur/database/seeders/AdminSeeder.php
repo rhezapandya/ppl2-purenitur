@@ -5,6 +5,7 @@ namespace Database\Seeders;
 use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
 use App\Models\User;
+use App\Models\ShoppingCart;
 use Illuminate\Support\Facades\Hash;
 
 class AdminSeeder extends Seeder
@@ -15,6 +16,7 @@ class AdminSeeder extends Seeder
     public function run(): void
     {
         User::truncate();
+        ShoppingCart::truncate();
         $heading = true;
         $input_file = fopen(base_path("database/data/dataadmin.csv"), "r");
         while (($record = fgetcsv($input_file, null, ",")) !== FALSE) {
@@ -30,7 +32,13 @@ class AdminSeeder extends Seeder
                     "telephone" => $record['7'],
                     "is_admin" => $record['8'],
                 );
+                $cart = array(
+                    "email_user" => $record['0'],
+                    "username_user" => $record['1'],
+                    "cart" => json_encode([]),
+                );
                 User::create($user);
+                ShoppingCart::create($cart);
             }
             $heading = false;
         }
