@@ -1,0 +1,11 @@
+﻿name_shipment,type_shipment,day_estimation,price_shipment
+JNE Jabodetabek,Land,2,10000
+JNE Jawa Barat,Land,3,12000
+JNE Region Jawa,Land,5,20000
+JNE Nasional,Sea,7,50000
+JNE Internasional,Air,14,100000
+POS Java Region,Land,6,18000
+POS National,Sea,7,45000
+JNT Pulau Jawa,Land,5,25000
+JNT Nasional,Sea,8,40000
+JNT Internasional,Air,20,75000

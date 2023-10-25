@@ -1,0 +1,120 @@
+name_product,category,sku,price,image,rating,sold
+GRILLTIDER,Alat Dapur,PRNTNRALD001,59900,https://d2xjmi1k71iy2m.cloudfront.net/dairyfarm/id/images/159/0815911_PE773102_S4.jpg,3.6,0
+TOMAT,Alat Dapur,PRNTNRALD002,19900,https://d2xjmi1k71iy2m.cloudfront.net/dairyfarm/id/images/477/1147771_PE883455_S4.jpg,4.0,0
+KALLSINNIG,Alat Dapur,PRNTNRALD003,29900,https://d2xjmi1k71iy2m.cloudfront.net/dairyfarm/id/images/628/1062845_PE851057_S4.jpg,3.7,0
+SPARTANSK,Alat Dapur,PRNTNRALD004,29900,https://d2xjmi1k71iy2m.cloudfront.net/dairyfarm/id/images/620/1062060_PE850637_S4.jpg,3.5,0
+SOMMARFLOX,Alat Dapur,PRNTNRALD005,79900,https://d2xjmi1k71iy2m.cloudfront.net/dairyfarm/id/images/609/1160902_PE889182_S4.jpg,4.5,0
+ÖMSESIDIG,Alat Dapur,PRNTNRALD006,79900,https://d2xjmi1k71iy2m.cloudfront.net/dairyfarm/id/images/273/1127373_PE876189_S4.jpg,4.7,0
+GRILLTIDER,Alat Dapur,PRNTNRALD007,79900,https://d2xjmi1k71iy2m.cloudfront.net/dairyfarm/id/images/815/1081594_PE858422_S4.jpg,3.5,0
+UPPFYLLD,Alat Dapur,PRNTNRALD008,99900,https://d2xjmi1k71iy2m.cloudfront.net/dairyfarm/id/images/608/1160878_PE889175_S4.jpg,4.8,0
+SOMMARFLOX,Alat Dapur,PRNTNRALD009,199000,https://d2xjmi1k71iy2m.cloudfront.net/dairyfarm/id/images/580/1158031_PE887971_S4.jpg,3.8,0
+TROFAST,Alat Dapur,PRNTNRALD010,75000,https://d2xjmi1k71iy2m.cloudfront.net/dairyfarm/id/images/423/1042387_PE841366_S4.jpg,4.2,0
+SOMMARFLOX,Alat Dapur,PRNTNRALD011,29900,https://d2xjmi1k71iy2m.cloudfront.net/dairyfarm/id/images/566/1156675_PE887193_S4.jpg,3.4,0
+IKEA 365+,Alat Dapur,PRNTNRALD012,249000,https://d2xjmi1k71iy2m.cloudfront.net/dairyfarm/id/images/487/1148738_PE883807_S4.jpg,4.8,0
+ÖMSESIDIG,Alat Dapur,PRNTNRALD013,79900,https://d2xjmi1k71iy2m.cloudfront.net/dairyfarm/id/images/272/1127244_PE876125_S4.jpg,3.4,0
+INNER,Bantal,PRNTNRBNT014,120000,https://d2xjmi1k71iy2m.cloudfront.net/dairyfarm/id/images/381/1138125_PE879845_S4.jpg,4.3,0
+MALINDA,Bantal,PRNTNRBNT015,119000,https://d2xjmi1k71iy2m.cloudfront.net/dairyfarm/id/images/381/1138170_PE879869_S4.jpg,4.5,0
+INNER,Bantal,PRNTNRBNT016,60000,https://d2xjmi1k71iy2m.cloudfront.net/dairyfarm/id/images/381/1138127_PE879848_S4.jpg,4.5,0
+JORDKASTANJ,Bantal,PRNTNRBNT017,49900,https://d2xjmi1k71iy2m.cloudfront.net/dairyfarm/id/images/384/1138424_PE879956_S4.jpg,3.3,0
+SANDMOTT,Bantal,PRNTNRBNT018,99000,https://d2xjmi1k71iy2m.cloudfront.net/dairyfarm/id/images/389/1138929_PE880150_S4.jpg,3.6,0
+SVARTPOPPEL,Bantal,PRNTNRBNT019,99000,https://d2xjmi1k71iy2m.cloudfront.net/dairyfarm/id/images/179/1117914_PE872820_S4.jpg,3.5,0
+SVÄRDKRISSLA,Bantal,PRNTNRBNT020,199000,https://d2xjmi1k71iy2m.cloudfront.net/dairyfarm/id/images/437/1143757_PE881586_S4.jpg,4.8,0
+INNER,Bantal,PRNTNRBNT021,80000,https://d2xjmi1k71iy2m.cloudfront.net/dairyfarm/id/images/381/1138120_PE879840_S4.jpg,4.7,0
+JÄTTEVALLMO,Bantal,PRNTNRBNT022,49900,https://d2xjmi1k71iy2m.cloudfront.net/dairyfarm/id/images/385/1138533_PE879983_S4.jpg,4.9,0
+SANDMOTT,Bantal,PRNTNRBNT023,99000,https://d2xjmi1k71iy2m.cloudfront.net/dairyfarm/id/images/389/1138926_PE880153_S4.jpg,4.0,0
+ENRUM,Dekorasi,PRNTNRDKR024,69900,https://d2xjmi1k71iy2m.cloudfront.net/dairyfarm/id/images/377/1137793_PE879744_S4.jpg,4.0,0
+ÖMSESIDIG,Dekorasi,PRNTNRDKR025,69900,https://d2xjmi1k71iy2m.cloudfront.net/dairyfarm/id/images/272/1127247_PE876128_S4.jpg,4.2,0
+BORRBY,Dekorasi,PRNTNRDKR026,99900,https://d2xjmi1k71iy2m.cloudfront.net/dairyfarm/id/images/372/1137287_PE892941_S4.jpg,4.8,0
+SMÄLLSPIREA,Dekorasi,PRNTNRDKR027,99900,https://d2xjmi1k71iy2m.cloudfront.net/dairyfarm/id/images/476/1147671_PE883396_S4.jpg,4.8,0
+ÄDELSYREN,Dekorasi,PRNTNRDKR028,49900,https://d2xjmi1k71iy2m.cloudfront.net/dairyfarm/id/images/244/1124422_PE875166_S4.jpg,4.2,0
+VINDSTILLA,Dekorasi,PRNTNRDKR029,119000,https://d2xjmi1k71iy2m.cloudfront.net/dairyfarm/id/images/476/1147692_PE883412_S4.jpg,4.3,0
+ÄDELSYREN,Dekorasi,PRNTNRDKR030,69900,https://d2xjmi1k71iy2m.cloudfront.net/dairyfarm/id/images/476/1147694_PE883414_S4.jpg,4.0,0
+ROSENMANDEL,Gordyn,PRNTNRGRD031,599000,https://d2xjmi1k71iy2m.cloudfront.net/dairyfarm/id/images/358/1135863_PE879183_S4.jpg,3.6,0
+ROSENMANDEL,Gordyn,PRNTNRGRD032,599000,https://d2xjmi1k71iy2m.cloudfront.net/dairyfarm/id/images/360/1136048_PE879245_S4.jpg,3.2,0
+PARKERINGAR,Karpet,PRNTNRKPT033,699000,https://d2xjmi1k71iy2m.cloudfront.net/dairyfarm/id/images/945/1194546_PE901976_S4.jpg,3.2,0
+PARKERINGAR,Karpet,PRNTNRKPT034,699000,https://d2xjmi1k71iy2m.cloudfront.net/dairyfarm/id/images/945/1194540_PE901971_S4.jpg,3.7,0
+SKÖTSAM,Karpet,PRNTNRKPT035,129000,https://d2xjmi1k71iy2m.cloudfront.net/dairyfarm/id/images/568/1056867_PE848622_S4.jpg,4.8,0
+TRONES,Kompartemen,PRNTNRKMP036,599000,https://d2xjmi1k71iy2m.cloudfront.net/dairyfarm/id/images/543/1154303_PE885979_S4.jpg,3.4,0
+GREJIG,Kompartemen,PRNTNRKMP037,79900,https://d2xjmi1k71iy2m.cloudfront.net/dairyfarm/id/images/543/1154305_PE885977_S4.jpg,3.2,0
+SPIKSMED,Kompartemen,PRNTNRKMP038,699000,https://d2xjmi1k71iy2m.cloudfront.net/dairyfarm/id/images/525/1152576_PE885416_S4.jpg,3.0,0
+NÄMMARÖ,Kompartemen,PRNTNRKMP039,1225000,https://d2xjmi1k71iy2m.cloudfront.net/dairyfarm/id/images/753/1175345_PE894657_S4.jpg,3.3,0
+SPINNROCK,Kompartemen,PRNTNRKMP040,99900,https://d2xjmi1k71iy2m.cloudfront.net/dairyfarm/id/images/715/1171561_PE893134_S4.jpg,4.7,0
+SPIKSMED,Kompartemen,PRNTNRKMP041,1398000,https://d2xjmi1k71iy2m.cloudfront.net/dairyfarm/id/images/622/1162284_PE889757_S4.jpg,3.8,0
+NÄMMARÖ,Kompartemen,PRNTNRKMP042,1999000,https://d2xjmi1k71iy2m.cloudfront.net/dairyfarm/id/images/387/1138750_PE880050_S4.jpg,3.5,0
+KOMPLEMENT,Kompartemen,PRNTNRKMP043,450000,https://d2xjmi1k71iy2m.cloudfront.net/dairyfarm/id/images/346/1134604_PE878821_S4.jpg,4.4,0
+NÄMMARÖ,Kursi,PRNTNRKRS044,1495000,https://d2xjmi1k71iy2m.cloudfront.net/dairyfarm/id/images/387/1138755_PE880055_S4.jpg,3.3,0
+TORPARÖ,Kursi,PRNTNRKRS045,625000,https://d2xjmi1k71iy2m.cloudfront.net/dairyfarm/id/images/389/1138953_PE880158_S4.jpg,3.5,0
+NÄMMARÖ,Kursi,PRNTNRKRS046,995000,https://d2xjmi1k71iy2m.cloudfront.net/dairyfarm/id/images/387/1138759_PE880059_S4.jpg,4.3,0
+NÄMMARÖ,Kursi,PRNTNRKRS047,675000,https://d2xjmi1k71iy2m.cloudfront.net/dairyfarm/id/images/387/1138756_PE880056_S4.jpg,4.2,0
+NÄMMARÖ,Kursi,PRNTNRKRS048,425000,https://d2xjmi1k71iy2m.cloudfront.net/dairyfarm/id/images/387/1138761_PE880061_S4.jpg,3.3,0
+HOLMSEL,Kursi,PRNTNRKRS049,795000,https://d2xjmi1k71iy2m.cloudfront.net/dairyfarm/id/images/865/0186593_PE338763_S4.jpg,3.0,0
+VIMUND,Kursi,PRNTNRKRS050,999000,https://d2xjmi1k71iy2m.cloudfront.net/dairyfarm/id/images/858/1185891_PE898595_S4.jpg,4.8,0
+NÄMMARÖ,Kursi,PRNTNRKRS051,1595000,https://d2xjmi1k71iy2m.cloudfront.net/dairyfarm/id/images/387/1138754_PE880054_S4.jpg,4.0,0
+NÄMMARÖ,Kursi,PRNTNRKRS052,995000,https://d2xjmi1k71iy2m.cloudfront.net/dairyfarm/id/images/387/1138763_PE880063_S4.jpg,3.6,0
+NÄMMARÖ,Kursi,PRNTNRKRS053,975000,https://d2xjmi1k71iy2m.cloudfront.net/dairyfarm/id/images/387/1138757_PE880057_S4.jpg,3.5,0
+TORPARÖ,Kursi,PRNTNRKRS054,625000,https://d2xjmi1k71iy2m.cloudfront.net/dairyfarm/id/images/389/1138957_PE880162_S4.jpg,4.3,0
+TUMHOLMEN,Kursi,PRNTNRKRS055,1499000,https://d2xjmi1k71iy2m.cloudfront.net/dairyfarm/id/images/481/1148177_PE883706_S4.jpg,4.8,0
+SEGERÖN,Kursi,PRNTNRKRS056,2295000,https://d2xjmi1k71iy2m.cloudfront.net/dairyfarm/id/images/471/1147135_PE883282_S4.jpg,4.6,0
+TORPARÖ,Kursi,PRNTNRKRS057,995000,https://d2xjmi1k71iy2m.cloudfront.net/dairyfarm/id/images/389/1138952_PE880157_S4.jpg,4.8,0
+SKARPÖ,Kursi,PRNTNRKRS058,999000,https://d2xjmi1k71iy2m.cloudfront.net/dairyfarm/id/images/389/1138958_PE880163_S4.jpg,4.7,0
+NÄMMARÖ,Kursi,PRNTNRKRS059,900000,https://d2xjmi1k71iy2m.cloudfront.net/dairyfarm/id/images/387/1138748_PE880048_S4.jpg ,3.0,0
+LILLÅNÄS,Kursi,PRNTNRKRS060,1995000,https://d2xjmi1k71iy2m.cloudfront.net/dairyfarm/id/images/502/1150252_PE884439_S4.jpg,3.6,0
+LURVIG,Lain-Lain,PRNTNRDLL061,99900,https://d2xjmi1k71iy2m.cloudfront.net/dairyfarm/id/images/460/0546043_PE655868_S4.jpg,3.2,0
+RUNNEN,Lain-Lain,PRNTNRDLL062,345000,https://d2xjmi1k71iy2m.cloudfront.net/dairyfarm/id/images/511/1151157_PE884806_S4.jpg,3.7,0
+ANLEDNING,Lain-Lain,PRNTNRDLL063,149000,https://d2xjmi1k71iy2m.cloudfront.net/dairyfarm/id/images/363/1036312_PE838410_S4.jpg,4.9,0
+RUNNEN,Lain-Lain,PRNTNRDLL064,695000,https://d2xjmi1k71iy2m.cloudfront.net/dairyfarm/id/images/472/0547200_PE656497_S4.jpg,4.2,0
+UPPÅTVIND,Lain-Lain,PRNTNRDLL065,799000,https://d2xjmi1k71iy2m.cloudfront.net/dairyfarm/id/images/132/1113273_PE871676_S4.jpg,4.8,0
+KNALLA,Lain-Lain,PRNTNRDLL066,99900,https://d2xjmi1k71iy2m.cloudfront.net/dairyfarm/id/images/662/1166269_PE891094_S4.jpg,4.3,0
+TJALLA,Lain-Lain,PRNTNRDLL067,199000,https://d2xjmi1k71iy2m.cloudfront.net/dairyfarm/id/images/335/0633571_PE695905_S4.jpg,4.5,0
+LURVIG,Lain-Lain,PRNTNRDLL068,89900,https://d2xjmi1k71iy2m.cloudfront.net/dairyfarm/id/images/239/0523927_PE644095_S4.jpg,4.4,0
+PLATSA,Lain-Lain,PRNTNRDLL069,1499000,https://d2xjmi1k71iy2m.cloudfront.net/dairyfarm/id/images/725/0772512_PE756013_S4.jpg,3.6,0
+BOAXEL,Lain-Lain,PRNTNRDLL070,50000,https://d2xjmi1k71iy2m.cloudfront.net/dairyfarm/id/images/981/0798127_PE767133_S4.jpg,3.3,0
+SVARTSTARR,Lain-Lain,PRNTNRDLL071,229000,https://d2xjmi1k71iy2m.cloudfront.net/dairyfarm/id/images/605/1160508_PE888932_S4.jpg,3.4,0
+BAGGMUCK,Lain-Lain,PRNTNRDLL072,79900,https://d2xjmi1k71iy2m.cloudfront.net/dairyfarm/id/images/543/1154304_PE885978_S4.jpg,4.4,0
+SOMMARLÅNKE,Lampu,PRNTNRLMP073,129000,https://d2xjmi1k71iy2m.cloudfront.net/dairyfarm/id/images/560/1156059_PE886872_S4.jpg,3.9,0
+HÅRSLINGA,Lampu,PRNTNRLMP074,399000,https://d2xjmi1k71iy2m.cloudfront.net/dairyfarm/id/images/443/1144331_PE881787_S4.jpg,4.2,0
+PEKTOLIT,Lampu,PRNTNRLMP076,499000,https://d2xjmi1k71iy2m.cloudfront.net/dairyfarm/id/images/329/1132998_PE878366_S4.jpg,3.0,0
+FORSÅ,Lampu,PRNTNRLMP077,399000,https://d2xjmi1k71iy2m.cloudfront.net/dairyfarm/id/images/316/1031615_PE836564_S4.jpg,4.3,0
+ANKARSPEL,Lampu,PRNTNRLMP078,999000,https://d2xjmi1k71iy2m.cloudfront.net/dairyfarm/id/images/673/1067377_PE852699_S4.jpg,3.5,0
+SOMMARLÅNKE,Lampu,PRNTNRLMP079,349000,https://d2xjmi1k71iy2m.cloudfront.net/dairyfarm/id/images/700/1170018_PE892635_S4.jpg,4.3,0
+HÅRSLINGA,Lampu,PRNTNRLMP080,399000,https://d2xjmi1k71iy2m.cloudfront.net/dairyfarm/id/images/677/1167712_PE891682_S4.jpg,4.1,0
+OLSERÖD,Meja,PRNTNRMJA081,499000,https://d2xjmi1k71iy2m.cloudfront.net/dairyfarm/id/images/508/1150823_PE884681_S4.jpg,3.8,0
+OLSERÖD,Meja,PRNTNRMJA082,499000,https://d2xjmi1k71iy2m.cloudfront.net/dairyfarm/id/images/508/1150822_PE884680_S4.jpg,4.8,0
+NÄMMARÖ,Meja,PRNTNRMJA083,1299000,https://d2xjmi1k71iy2m.cloudfront.net/dairyfarm/id/images/387/1138764_PE880049_S4.jpg,3.1,0
+SPIKSMED,Meja,PRNTNRMJA084,1598000,https://d2xjmi1k71iy2m.cloudfront.net/dairyfarm/id/images/622/1162286_PE889759_S4.jpg,4.6,0
+NÄMMARÖ,Meja,PRNTNRMJA085,2999000,https://d2xjmi1k71iy2m.cloudfront.net/dairyfarm/id/images/387/1138751_PE880051_S4.jpg,4.4,0
+LÅGASKÄR,Meja,PRNTNRMJA086,999000,https://d2xjmi1k71iy2m.cloudfront.net/dairyfarm/id/images/389/1138960_PE880165_S4.jpg,3.5,0
+BRYTBÖNA,Perabotan,PRNTNRPRB087,149000,https://d2xjmi1k71iy2m.cloudfront.net/dairyfarm/id/images/477/1147746_PE883437_S4.jpg,4.9,0
+IKEA PS 2002,Perabotan,PRNTNRPRB088,49900,https://d2xjmi1k71iy2m.cloudfront.net/dairyfarm/id/images/477/1147751_PE883439_S4.jpg,3.8,0
+ALFORSIT,Perabotan,PRNTNRPRB089,19900,https://d2xjmi1k71iy2m.cloudfront.net/dairyfarm/id/images/455/1145535_PE882705_S4.jpg,3.3,0
+GRÄSMARÖ,Perabotan,PRNTNRPRB090,79900,https://d2xjmi1k71iy2m.cloudfront.net/dairyfarm/id/images/477/1147776_PE883458_S4.jpg,3.4,0
+BRYTBÖNA,Perabotan,PRNTNRPRB091,79900,https://d2xjmi1k71iy2m.cloudfront.net/dairyfarm/id/images/477/1147741_PE883433_S4.jpg,3.8,0
+RULLEBÖR,Perabotan,PRNTNRPRB092,599000,https://d2xjmi1k71iy2m.cloudfront.net/dairyfarm/id/images/458/1045853_PE842738_S4.jpg,4.3,0
+ULLVIDE,Sprei,PRNTNRSPR093,299000,https://d2xjmi1k71iy2m.cloudfront.net/dairyfarm/id/images/040/0604097_PE681038_S4.jpg,3.8,0
+ÖMSESIDIG,Sprei,PRNTNRSPR094,499000,https://d2xjmi1k71iy2m.cloudfront.net/dairyfarm/id/images/271/1127162_PE876071_S4.jpg,4.2,0
+VÄDRA,Sprei,PRNTNRSPR095,129000,https://d2xjmi1k71iy2m.cloudfront.net/dairyfarm/id/images/569/1056918_PE848648_S4.jpg,4.7,0
+SKÄRMLILJA,Sprei,PRNTNRSPR096,249000,https://d2xjmi1k71iy2m.cloudfront.net/dairyfarm/id/images/383/1138378_PE879953_S4.jpg,4.3,0
+JÄTTEVALLMO,Sprei,PRNTNRSPR097,299000,https://d2xjmi1k71iy2m.cloudfront.net/dairyfarm/id/images/385/1138522_PE879973_S4.jpg,3.5,0
+FEJKA,Tanaman,PRNTNRTNM098,149000,https://d2xjmi1k71iy2m.cloudfront.net/dairyfarm/id/images/846/1184652_PE898009_S4.jpg,4.4,0
+VITLÖK,Tanaman,PRNTNRTNM099,299000,https://d2xjmi1k71iy2m.cloudfront.net/dairyfarm/id/images/340/1034001_PE840231_S4.jpg,4.1,0
+FEJKA,Tanaman,PRNTNRTNM100,119000,https://d2xjmi1k71iy2m.cloudfront.net/dairyfarm/id/images/846/1184665_PE898020_S4.jpg,3.1,0
+FEJKA,Tanaman,PRNTNRTNM101,59900,https://d2xjmi1k71iy2m.cloudfront.net/dairyfarm/id/images/832/1183252_PE897453_S4.jpg,4.2,0
+FEJKA,Tanaman,PRNTNRTNM102,119000,https://d2xjmi1k71iy2m.cloudfront.net/dairyfarm/id/images/846/1184679_PE898027_S4.jpg,3.7,0
+FEJKA,Tanaman,PRNTNRTNM103,129000,https://d2xjmi1k71iy2m.cloudfront.net/dairyfarm/id/images/846/1184650_PE898007_S4.jpg,4.7,0
+FLODBJÖRK,Tanaman,PRNTNRTNM104,399000,https://d2xjmi1k71iy2m.cloudfront.net/dairyfarm/id/images/480/1148002_PE883664_S4.jpg,4.2,0
+FEJKA,Tanaman,PRNTNRTNM105,999000,https://d2xjmi1k71iy2m.cloudfront.net/dairyfarm/id/images/546/1154600_PE886223_S4.jpg,3.3,0
+ÖMSESIDIG,Tanaman,PRNTNRTNM106,79900,https://d2xjmi1k71iy2m.cloudfront.net/dairyfarm/id/images/273/1127369_PE876187_S4.jpg,3.7,0
+FEJKA,Tanaman,PRNTNRTNM107,59900,https://d2xjmi1k71iy2m.cloudfront.net/dairyfarm/id/images/846/1184658_PE898015_S4.jpg,4.0,0
+OLIVBLAD,Tanaman,PRNTNRTNM108,289000,https://d2xjmi1k71iy2m.cloudfront.net/dairyfarm/id/images/481/1148131_PE883685_S4.jpg,3.7,0
+OLIVBLAD,Tanaman,PRNTNRTNM109,299000,https://d2xjmi1k71iy2m.cloudfront.net/dairyfarm/id/images/478/1147819_PE883680_S4.jpg,4.7,0
+ÅKERBÄR,Tanaman,PRNTNRTNM110,69900,https://d2xjmi1k71iy2m.cloudfront.net/dairyfarm/id/images/609/1160999_PE889244_S4.jpg,4.4,0
+FEJKA,Tanaman,PRNTNRTNM111,149000,https://d2xjmi1k71iy2m.cloudfront.net/dairyfarm/id/images/846/1184654_PE898011_S4.jpg,3.8,0
+CHILIPEPPAR,Tanaman,PRNTNRTNM112,899000,https://d2xjmi1k71iy2m.cloudfront.net/dairyfarm/id/images/517/0951783_PE804363_S4.jpg,4.2,0
+CHILIPEPPAR,Tanaman,PRNTNRTNM113,699000,https://d2xjmi1k71iy2m.cloudfront.net/dairyfarm/id/images/517/0951780_PE804360_S4.jpg,3.4,0
+KLARBÄR,Tanaman,PRNTNRTNM114,199000,https://d2xjmi1k71iy2m.cloudfront.net/dairyfarm/id/images/564/1156468_PE887105_S4.jpg,3.8,0
+FLADDRIG,Tas,PRNTNRTAS115,24900,https://d2xjmi1k71iy2m.cloudfront.net/dairyfarm/id/images/580/1158023_PE887964_S4.jpg,4.6,0
+ISTAD,Tas,PRNTNRTAS116,49900,https://d2xjmi1k71iy2m.cloudfront.net/dairyfarm/id/images/806/1080636_PE858406_S4.jpg,4.0,0
+ISTAD,Tas,PRNTNRTAS117,39900,https://d2xjmi1k71iy2m.cloudfront.net/dairyfarm/id/images/806/1080640_PE858405_S4.jpg,3.4,0
+SKÖRDA,Tas,PRNTNRTAS118,19900,https://d2xjmi1k71iy2m.cloudfront.net/dairyfarm/id/images/662/1166277_PE891100_S4.jpg,3.3,0
+SKYNKE,Tas,PRNTNRTAS119,19900,https://d2xjmi1k71iy2m.cloudfront.net/dairyfarm/id/images/662/1166272_PE891097_S4.jpg,3.4,0
+LURVIG,Tas,PRNTNRTAS120,399000,https://d2xjmi1k71iy2m.cloudfront.net/dairyfarm/id/images/797/0779769_PE759665_S4.jpg,4.2,0
