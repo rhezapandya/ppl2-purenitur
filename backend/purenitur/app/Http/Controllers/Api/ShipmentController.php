@@ -27,6 +27,88 @@ class ShipmentController extends Controller
     }
 
     /**
+     * Create shipment of orders
+     */
+    public function create_shipment(Request $request)
+    {
+        $check_validation = Validator::make($request->all(), [
+            'order_id' => 'integer',
+            'shipment_status' => ['string', 'max:255', 'in:SHIPPING'],
+        ]);
+
+        if ($check_validation->fails()) {
+            return response()->json([
+                'status' => false,
+                'message' => 'Validation not fulfilled!',
+                'errors' => $check_validation->errors(),
+            ], 422);
+        } else {
+            $orders = Order::where('id', $request->order_id)->first(['id', 'status_payment', 'shipment_id', 'shipment_status']);
+
+            if (!$orders) {
+                return response()->json([
+                    'status' => false,
+                    'message' => "Order ID not Exist!",
+                ], 404);
+            } else if ($orders->status_payment !== 'CONFIRMED') {
+                return response()->json([
+                    'status' => false,
+                    'message' => "Payment not Confirmed yet!",
+                ], 404);
+            } else {
+                $update_order = Order::where('id', $request->order_id)
+                    ->update(['shipment_id' => $request->order_id, 'shipment_status' => $request->shipment_status]);
+
+                return response()->json([
+                    'status' => true,
+                    'message' => "Shipment Created. Order Updated!",
+                ], 200);
+            }
+        }
+    }
+
+    /**
+     * Update the specified resource in storage.
+     */
+    public function update_shipment(Request $request)
+    {
+        $check_validation = Validator::make($request->all(), [
+            'order_id' => 'integer',
+            'shipment_status' => ['string', 'max:255', 'in:ARRIVED'],
+        ]);
+
+        if ($check_validation->fails()) {
+            return response()->json([
+                'status' => false,
+                'message' => 'Validation not fulfilled!',
+                'errors' => $check_validation->errors(),
+            ], 422);
+        } else {
+            $orders = Order::where('id', $request->order_id)->first(['id', 'shipment_id', 'shipment_status']);
+
+            if (!$orders) {
+                return response()->json([
+                    'status' => false,
+                    'message' => "Order ID not Exist!",
+                ], 404);
+            } else if ($orders->shipment_status === 'ARRIVED') {
+                return response()->json([
+                    'status' => false,
+                    'message' => "Your order already arrived at destination",
+                ], 404);
+            } else {
+                $update_order = Order::where('id', $request->order_id)
+                    ->update(['shipment_id' => $request->order_id, 'shipment_status' => $request->shipment_status]);
+
+                return response()->json([
+                    'status' => true,
+                    'message' => "Shipment Created. Order Updated!",
+                ], 200);
+            }
+        }
+    }
+
+    /**
      * Store a newly created resource in storage.
      */
     public function store(Request $request)

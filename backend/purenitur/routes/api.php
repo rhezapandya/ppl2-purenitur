@@ -2,10 +2,12 @@
 
 use App\Http\Controllers\Api\CartController;
 use App\Http\Controllers\Api\CatalogController;
+use App\Http\Controllers\Api\DiscountController;
 use App\Http\Controllers\Api\OrderController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Api\ProductController;
+use App\Http\Controllers\Api\ShipmentController;
 use App\Http\Controllers\Api\UserController;
 
 /*
@@ -42,12 +44,21 @@ Route::get('/checkout', [OrderController::class, 'index']);
 Route::post('/checkout/create', [OrderController::class, 'store']);
 Route::post('/checkout/payment', [OrderController::class, 'transaction_store']);
 Route::post('/checkout/payment/confirm', [OrderController::class, 'confirm_transaction']);
+Route::post('/checkout/payment/failure', [OrderController::class, 'failed_transaction']);
+Route::post('/checkout/shipment/create', [ShipmentController::class, 'create_shipment']);
+Route::post('/checkout/shipment/update', [ShipmentController::class, 'update_shipment']);
 
 // API For Products CRUD (Admin)
 Route::get('/admin/products', [ProductController::class, 'show']);
 Route::post('/admin/products/create', [ProductController::class, 'store']);
 Route::patch('/admin/products/update/{id}', [ProductController::class, 'update']);
 Route::delete('/admin/products/delete/{id}', [ProductController::class, 'destroy']);
+
+// API For Discount CRUD (Admin)
+Route::get('/admin/discount', [DiscountController::class, 'index']);
+Route::post('/admin/discount/create', [DiscountController::class, 'create']);
+Route::patch('/admin/discount/update/{id}', [DiscountController::class, 'update']);
+Route::delete('/admin/discount/delete/{id}', [DiscountController::class, 'destroy']);
 
 // API For Users CRUD
 Route::get('/users', [UserController::class, 'index']);

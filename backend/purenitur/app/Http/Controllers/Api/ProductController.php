@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Api;
 
 use App\Models\Product;
+use App\Models\ProductDetail;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Validator;
@@ -35,7 +36,7 @@ class ProductController extends Controller
         if ($check_sku) {
             return response()->json([
                 'status' => false,
-                'message' => "Duplicate SKU!",
+                'message' => "Product (SKU) already exists!",
             ], 422);
         } else {
             $check_validation = Validator::make($request->all(), [
@@ -46,6 +47,10 @@ class ProductController extends Controller
                 'image' => ['string', 'max:255'],
                 'rating' => ['numeric', 'max:5.00'],
                 'sold' => ['integer', 'max:255'],
+                'feature_1' => ['string', 'max:255'],
+                'feature_2' => ['string', 'max:255'],
+                'feature_3' => ['string', 'max:255'],
+                'feature_4' => ['string', 'max:255'],
             ]);
 
             if ($check_validation->fails()) {
@@ -65,10 +70,20 @@ class ProductController extends Controller
                     "sold" => $request->sold
                 ]);
 
+                $product_details = ProductDetail::create([
+                    "name_product" => $request->name_product,
+                    "sku" => $request->sku,
+                    "feature_1" => $request->feature_1,
+                    "feature_2" => $request->feature_2,
+                    "feature_3" => $request->feature_3,
+                    "feature_4" => $request->feature_4,
+                ]);
+
                 return response()->json([
                     'status' => true,
                     'message' => "Product Created successfully!",
-                    'products' => $products
+                    'product' => $products,
+                    'product_detail' => $product_details
                 ], 200);
             }
         }
@@ -85,7 +100,7 @@ class ProductController extends Controller
 
         return response()->json([
             'status' => true,
-            'message' => "Product Created successfully!",
+            'message' => "Show All Products!",
             'products' => $products
         ], 200);
     }
@@ -114,6 +129,10 @@ class ProductController extends Controller
                 'image' => ['string', 'max:255'],
                 'rating' => ['numeric', 'max:5.00'],
                 'sold' => ['integer', 'max:255'],
+                'feature_1' => ['string', 'max:255'],
+                'feature_2' => ['string', 'max:255'],
+                'feature_3' => ['string', 'max:255'],
+                'feature_4' => ['string', 'max:255'],
             ]);
 
             if ($check_validation->fails()) {
@@ -134,10 +153,21 @@ class ProductController extends Controller
                         "sold" => $request->sold
                     ]);
 
+                $product_details = ProductDetail::where('id', $request->id)
+                    ->update([
+                        "name_product" => $request->name_product,
+                        "sku" => $request->sku,
+                        "feature_1" => $request->feature_1,
+                        "feature_2" => $request->feature_2,
+                        "feature_3" => $request->feature_3,
+                        "feature_4" => $request->feature_4,
+                    ]);
+
                 return response()->json([
                     'status' => true,
                     'message' => "Product Update successfully!",
-                    'product' => $product
+                    'product' => $product,
+                    'product_detail' => $product_details
                 ], 200);
             }
         } else {
@@ -159,10 +189,14 @@ class ProductController extends Controller
             $product = Product::where('id', $request->id)
                 ->delete();
 
+            $product_detail = ProductDetail::where('id', $request->id)
+                ->delete();
+
             return response()->json([
                 'status' => true,
                 'message' => "Product Deleted successfully!",
-                'product' => $product
+                'product' => $product,
+                'product_detail' => $product_detail
             ], 200);
         } else {
             return response()->json([
