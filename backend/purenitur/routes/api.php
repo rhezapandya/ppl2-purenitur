@@ -26,17 +26,22 @@ Route::middleware(['auth:sanctum'])->get('/user', function (Request $request) {
 // Route::group(['middleware' => 'auth:sanctum'], function () {
 // });
 
-// API For FE
+// API For Catalog & Product View (User)
 Route::get('/catalog', [CatalogController::class, 'index']);
 Route::get('/catalog/{category}', [CatalogController::class, 'index_filtered']);
 Route::get('/product-detail/{product:name_product}', [CatalogController::class, 'show']);
+
+// API For Shopping Cart (User)
 Route::get('/cart', [CartController::class, 'show_cart']);
 Route::post('/cart/add', [CartController::class, 'store']);
 Route::post('/cart/add-qty', [CartController::class, 'increaseQuantity']);
 Route::post('/cart/dec-qty', [CartController::class, 'decreaseQuantity']);
 
+// API For Checkout & Payment (User)
 Route::get('/checkout', [OrderController::class, 'index']);
 Route::post('/checkout/create', [OrderController::class, 'store']);
+Route::post('/checkout/payment', [OrderController::class, 'transaction_store']);
+Route::post('/checkout/payment/confirm', [OrderController::class, 'confirm_transaction']);
 
 // API For Products CRUD (Admin)
 Route::get('/admin/products', [ProductController::class, 'show']);
