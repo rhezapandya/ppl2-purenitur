@@ -21,7 +21,7 @@ class OrderController extends Controller
     public function index(Request $request)
     {
         $check_validation = Validator::make($request->all(), [
-            'id' => 'integer',
+            'user_id' => 'integer',
         ]);
 
         if ($check_validation->fails()) {
@@ -31,7 +31,7 @@ class OrderController extends Controller
                 'errors' => $check_validation->errors(),
             ], 422);
         } else {
-            $check_id = User::where('id', $request->id)
+            $check_id = User::where('id', $request->user_id)
                 ->first();
 
             if (!$check_id) {
@@ -40,7 +40,7 @@ class OrderController extends Controller
                     'message' => 'You have not registered yet!',
                 ], 422);
             } else {
-                $email = Order::where('orders.user_id', $request->id)
+                $email = Order::where('orders.user_id', $request->user_id)
                     ->join('users', 'users.id', '=', 'orders.user_id')
                     ->first('users.username');
 
@@ -51,7 +51,7 @@ class OrderController extends Controller
                     ], 422);
                 } else {
 
-                    $orders = Order::where('orders.user_id', $request->id)
+                    $orders = Order::where('orders.user_id', $request->user_id)
                         ->join('users', 'users.id', '=', 'orders.user_id')
                         ->get([
                             'orders.id',
@@ -212,10 +212,9 @@ class OrderController extends Controller
                     'message' => "Order ID not Exist!",
                 ], 404);
             } else {
-                $isTransaction = Order::where('id', $request->order_id)->first(['transaction_id']);
+                $isTransaction = Order::where('id', $request->order_id)->first(['transaction_id', 'status_payment']);
 
                 if (!$isTransaction->transaction_id) {
-
                     $cartItem = json_decode($orders->cart);
 
                     foreach ($cartItem as $data) {
@@ -272,7 +271,7 @@ class OrderController extends Controller
     {
         $check_validation = Validator::make($request->all(), [
             'order_id' => 'integer',
-            'status_payment' => ['string', 'max:255'],
+            'status_payment' => ['string', 'max:255', 'in:CONFIRMED'],
         ]);
 
         if ($check_validation->fails()) {
@@ -282,12 +281,17 @@ class OrderController extends Controller
                 'errors' => $check_validation->errors(),
             ], 422);
         } else {
-            $orders = Order::where('id', $request->order_id)->first(['id', 'status_payment', 'cart']);
+            $orders = Order::where('id', $request->order_id)->first(['id', 'status_payment']);
 
             if (!$orders) {
                 return response()->json([
-                    'status' => true,
+                    'status' => false,
                     'message' => "Order ID not Exist!",
+                ], 404);
+            } else if ($orders->status_payment === "CONFIRMED") {
+                return response()->json([
+                    'status' => false,
+                    'message' => "Orders already Confirmed!",
                 ], 404);
             } else {
                 $update_order = Order::where('id', $request->order_id)
@@ -296,6 +300,53 @@ class OrderController extends Controller
                 return response()->json([
                     'status' => true,
                     'message' => "Transaction Payment Confirmation Success. Order Updated!",
+                ], 200);
+            }
+        }
+    }
+
+    public function failed_transaction(Request $request)
+    {
+        $check_validation = Validator::make($request->all(), [
+            'order_id' => 'integer',
+            'status_payment' => ['string', 'max:255', 'in:FAILED'],
+        ]);
+
+        if ($check_validation->fails()) {
+            return response()->json([
+                'status' => false,
+                'message' => 'Validation not fulfilled!',
+                'errors' => $check_validation->errors(),
+            ], 422);
+        } else {
+            $orders = Order::where('id', $request->order_id)->first(['id', 'status_payment']);
+
+            if (!$orders) {
+                return response()->json([
+                    'status' => false,
+                    'message' => "Order ID not Exist!",
+                ], 404);
+            } else if ($orders->status_payment === "FAILED") {
+                return response()->json([
+                    'status' => false,
+                    'message' => "Orders already Failed!",
+                ], 404);
+            } else if ($orders->status_payment === 'CONFIRMED') {
+                return response()->json([
+                    'status' => false,
+                    'message' => "Orders already Confirmed!",
+                ], 404);
+            } else {
+                $update_order = Order::where('id', $request->order_id)
+                    ->update([
+                        'transaction_id' => null,
+                        'image_payment' => null,
+                        'status_payment' => $request->status_payment
+                    ]);
+
+                return response()->json([
+                    'status' => true,
+                    'message' => "Transaction Payment Confirmation Failed. Order Updated!",
                 ], 200);
             }
         }
