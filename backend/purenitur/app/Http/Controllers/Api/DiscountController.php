@@ -16,11 +16,18 @@ class DiscountController extends Controller
     {
         $discounts = Discount::all();
 
-        return response()->json([
-            'status' => true,
-            'message' => "Show All Discounts!",
-            'discounts' => $discounts
-        ], 200);
+        if ($discounts) {
+            return response()->json([
+                'status' => true,
+                'message' => "Show All Discounts!",
+                'discounts' => $discounts
+            ], 200);
+        } else {
+            return response()->json([
+                'status' => false,
+                'message' => 'Discount not found!',
+            ], 422);
+        }
     }
 
     /**

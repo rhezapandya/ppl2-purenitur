@@ -21,7 +21,7 @@ class OrderController extends Controller
     public function index(Request $request)
     {
         $check_validation = Validator::make($request->all(), [
-            'user_id' => 'integer',
+            'user_id' => ['required', 'integer']
         ]);
 
         if ($check_validation->fails()) {
@@ -102,10 +102,10 @@ class OrderController extends Controller
     public function store(Request $request)
     {
         $check_validation = Validator::make($request->all(), [
-            'id' => 'integer',
+            'user_id' => ['required', 'integer'],
             'discount_name' => ['nullable', 'string', 'max:255'],
-            "payment_method" => ['string', 'max:255'],
-            "shipment_address" => ['string', 'max:255'],
+            "payment_method" => ['required', 'string', 'max:255'],
+            "shipment_address" => ['required', 'string', 'max:255'],
         ]);
 
         if ($check_validation->fails()) {
@@ -115,7 +115,7 @@ class OrderController extends Controller
                 'errors' => $check_validation->errors(),
             ], 422);
         } else {
-            $users = User::where('id', $request->id)
+            $users = User::where('id', $request->user_id)
                 ->first(['id', 'email']);
 
             if (!$users) {
@@ -161,7 +161,7 @@ class OrderController extends Controller
                     $final_item = json_encode($item_in_carts);
 
                     $createOrder = array(
-                        "user_id" => $request->id,
+                        "user_id" => $request->user_id,
                         "cart" => $final_item,
                         "price_total" => $base_price,
                         "discount_id" => $discount_name,
@@ -193,8 +193,8 @@ class OrderController extends Controller
     public function transaction_store(Request $request)
     {
         $check_validation = Validator::make($request->all(), [
-            'order_id' => 'integer',
-            'image_payment' => 'required'
+            'order_id' => ['required', 'integer'],
+            'image_payment' => 'required|mimes:jpeg,jpg,png,jfif,pdf',
         ]);
 
         if ($check_validation->fails()) {
@@ -270,7 +270,7 @@ class OrderController extends Controller
     public function confirm_transaction(Request $request)
     {
         $check_validation = Validator::make($request->all(), [
-            'order_id' => 'integer',
+            'order_id' => ['required', 'integer'],
             'status_payment' => ['string', 'max:255', 'in:CONFIRMED'],
         ]);
 
@@ -308,7 +308,7 @@ class OrderController extends Controller
     public function failed_transaction(Request $request)
     {
         $check_validation = Validator::make($request->all(), [
-            'order_id' => 'integer',
+            'order_id' => ['required', 'integer'],
             'status_payment' => ['string', 'max:255', 'in:FAILED'],
         ]);
 

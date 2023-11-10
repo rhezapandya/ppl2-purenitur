@@ -52,9 +52,9 @@ class CartController extends Controller
     {
         $check_validation = Validator::make($request->all(), [
             'email' => 'required|email:rfc,dns,email',
-            'item_id' => ['integer'],
-            'name_product' => ['string', 'max:255'],
-            'price' => ['numeric', 'max:999999999.99'],
+            'item_id' => ['required', 'integer'],
+            'name_product' => ['required', 'string', 'max:255'],
+            'price' => ['required', 'numeric', 'max:999999999.99'],
         ]);
 
         if ($check_validation->fails()) {
@@ -136,7 +136,7 @@ class CartController extends Controller
     {
         $check_validation = Validator::make($request->all(), [
             'email' => 'required|email:rfc,dns,email',
-            'rowId' => ['integer'],
+            'rowId' => ['required', 'integer'],
         ]);
 
         if ($check_validation->fails()) {
@@ -191,7 +191,7 @@ class CartController extends Controller
     {
         $check_validation = Validator::make($request->all(), [
             'email' => 'required|email:rfc,dns,email',
-            'rowId' => ['integer'],
+            'rowId' => ['required', 'integer'],
         ]);
 
         if ($check_validation->fails()) {

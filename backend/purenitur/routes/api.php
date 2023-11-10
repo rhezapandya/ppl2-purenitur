@@ -31,7 +31,7 @@ Route::middleware(['auth:sanctum'])->get('/user', function (Request $request) {
 // API For Catalog & Product View (User)
 Route::get('/catalog', [CatalogController::class, 'index']);
 Route::get('/catalog/{category}', [CatalogController::class, 'index_filtered']);
-Route::get('/product-detail/{product:name_product}', [CatalogController::class, 'show']);
+Route::get('/product-detail/{name_product}', [CatalogController::class, 'show']);
 
 // API For Shopping Cart (User)
 Route::get('/cart', [CartController::class, 'show_cart']);

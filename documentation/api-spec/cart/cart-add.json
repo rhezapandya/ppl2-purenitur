@@ -1,0 +1,109 @@
+{
+    "openapi": "3.0.0",
+    "info": {
+        "title": "Add Product to User's Shopping Cart API",
+        "version": "1.0.0"
+    },
+    "paths": {
+        "/api/cart/add": {
+            "post": {
+                "summary": "Add item to user's shopping cart",
+                "description": "Endpoint to add an item to the user's shopping cart.",
+                "requestBody": {
+                    "required": true,
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "type": "object",
+                                "properties": {
+                                    "email": {
+                                        "type": "string",
+                                        "format": "email",
+                                        "description": "User's email"
+                                    },
+                                    "item_id": {
+                                        "type": "integer",
+                                        "description": "ID of the product to be added"
+                                    },
+                                    "name_product": {
+                                        "type": "string",
+                                        "maxLength": 255,
+                                        "description": "Name of the product"
+                                    },
+                                    "price": {
+                                        "type": "number",
+                                        "maximum": 999999999.99,
+                                        "description": "Price of the product"
+                                    }
+                                },
+                                "required": [
+                                    "email",
+                                    "item_id",
+                                    "name_product",
+                                    "price"
+                                ]
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "Success",
+                        "content": {
+                            "application/json": {
+                                "example": {
+                                    "status": true,
+                                    "message": "Shopping cart updated successfully.",
+                                    "carts": {
+                                        "id": 4,
+                                        "email_user": "rhezapandyaa@gmail.com",
+                                        "username_user": "rhezapandya",
+                                        "cart": "{\"1\":{\"rowId\":1,\"item_id\":\"2\",\"name_product\":\"TOMAT\",\"qty\":1,\"price\":\"19,900.00\",\"tax\":\"1,990.00\",\"subtotal\":\"21,890.00\"}}",
+                                        "created_at": "2023-10-21T15:14:09.000000Z",
+                                        "updated_at": "2023-11-09T14:07:16.000000Z"
+                                    }
+                                }
+                            }
+                        }
+                    },
+                    "400": {
+                        "description": "Bad Request",
+                        "content": {
+                            "application/json": {
+                                "example": {
+                                    "status": false,
+                                    "message": "Item with the same item_id is already in the cart."
+                                }
+                            }
+                        }
+                    },
+                    "422": {
+                        "description": "Validation Failed",
+                        "content": {
+                            "application/json": {
+                                "example": {
+                                    "status": false,
+                                    "message": "Validation not fulfilled!",
+                                    "errors": {
+                                        "email": [
+                                            "The email field is required."
+                                        ],
+                                        "item_id": [
+                                            "The item_id field must be an integer."
+                                        ],
+                                        "name_product": [
+                                            "The name_product field must be a string."
+                                        ],
+                                        "price": [
+                                            "The price may not be greater than 999999999.99."
+                                        ]
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        }
+    }
+}

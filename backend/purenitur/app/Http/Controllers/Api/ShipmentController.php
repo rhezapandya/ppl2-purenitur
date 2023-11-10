@@ -32,8 +32,8 @@ class ShipmentController extends Controller
     public function create_shipment(Request $request)
     {
         $check_validation = Validator::make($request->all(), [
-            'order_id' => 'integer',
-            'shipment_status' => ['string', 'max:255', 'in:SHIPPING'],
+            'order_id' => ['required', 'integer'],
+            'shipment_status' => ['required', 'string', 'max:255', 'in:SHIPPING'],
         ]);
 
         if ($check_validation->fails()) {
@@ -61,7 +61,7 @@ class ShipmentController extends Controller
 
                 return response()->json([
                     'status' => true,
-                    'message' => "Shipment Created. Order Updated!",
+                    'message' => "Shipment Created. Status: Shipping. Order Updated!",
                 ], 200);
             }
         }
@@ -73,8 +73,8 @@ class ShipmentController extends Controller
     public function update_shipment(Request $request)
     {
         $check_validation = Validator::make($request->all(), [
-            'order_id' => 'integer',
-            'shipment_status' => ['string', 'max:255', 'in:ARRIVED'],
+            'order_id' => ['required', 'integer'],
+            'shipment_status' => ['required', 'string', 'max:255', 'in:ARRIVED'],
         ]);
 
         if ($check_validation->fails()) {
@@ -102,7 +102,7 @@ class ShipmentController extends Controller
 
                 return response()->json([
                     'status' => true,
-                    'message' => "Shipment Created. Order Updated!",
+                    'message' => "Shipment Arrived. Order Updated!",
                 ], 200);
             }
         }

@@ -1,0 +1,85 @@
+{
+    "openapi": "3.0.0",
+    "info": {
+        "title": "Create Shipment on Order API",
+        "version": "1.0.0"
+    },
+    "paths": {
+        "/api/checkout/shipment/create": {
+            "post": {
+                "summary": "Create Shipment on Order",
+                "description": "Endpoint to create a shipment on user's confirmed order by order ID.",
+                "parameters": [
+                    {
+                        "name": "order_id",
+                        "in": "body",
+                        "description": "ID of order",
+                        "required": true,
+                        "schema": {
+                            "type": "integer"
+                        }
+                    },
+                    {
+                        "name": "shipment_status",
+                        "in": "body",
+                        "description": "Shipment Status (SHIPPING)",
+                        "required": false,
+                        "schema": {
+                            "type": "string",
+                            "maximum": 255,
+                            "in": "SHIPPING"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Success",
+                        "content": {
+                            "application/json": {
+                                "example": {
+                                    "status": true,
+                                    "message": "Shipment Created. Status: Shipping. Order Updated!"
+                                }
+                            }
+                        }
+                    },
+                    "404": {
+                        "description": "Order ID not Exists or Payment not Confirmed",
+                        "content": {
+                            "application/json": {
+                                "example": {
+                                    "status": false,
+                                    "message": "Order ID not Exist!"
+                                },
+                                "example2": {
+                                    "status": false,
+                                    "message": "Payment not Confirmed yet!"
+                                }
+                            }
+                        }
+                    },
+                    "422": {
+                        "description": "Validation Failed",
+                        "content": {
+                            "application/json": {
+                                "example": {
+                                    "status": false,
+                                    "message": "Validation not fulfilled",
+                                    "errors": {
+                                        "order_id": [
+                                            "The order_id field must be a integer"
+                                        ],
+                                        "shipment_status": [
+                                            "The shipment_status field must be a string",
+                                            "The shipment_status field must be in SHIPPING"
+                                        ]
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        }
+    }
+}
