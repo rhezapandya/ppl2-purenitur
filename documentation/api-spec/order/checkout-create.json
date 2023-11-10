@@ -1,0 +1,124 @@
+{
+    "openapi": "3.0.0",
+    "info": {
+        "title": "Create User's Checkout API",
+        "version": "1.0.0"
+    },
+    "paths": {
+        "/api/checkout/create": {
+            "post": {
+                "summary": "Create User's Checkout",
+                "description": "Endpoint to create a checkout from a user by ID.",
+                "parameters": [
+                    {
+                        "name": "user_id",
+                        "in": "body",
+                        "description": "ID of user",
+                        "required": true,
+                        "schema": {
+                            "type": "integer"
+                        }
+                    },
+                    {
+                        "name": "discount_name",
+                        "in": "body",
+                        "description": "Name of Discount (Optional)",
+                        "required": false,
+                        "schema": {
+                            "type": "string",
+                            "maximum": 255
+                        }
+                    },
+                    {
+                        "name": "payment_method",
+                        "in": "body",
+                        "description": "Name of Payment Method",
+                        "required": true,
+                        "schema": {
+                            "type": "string"
+                        }
+                    },
+                    {
+                        "name": "shipment_address",
+                        "in": "body",
+                        "description": "User Shipment Address",
+                        "required": true,
+                        "schema": {
+                            "type": "string"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Success",
+                        "content": {
+                            "application/json": {
+                                "example": {
+                                    "status": true,
+                                    "message": "Order Created",
+                                    "carts": {
+                                        "1": {
+                                            "rowId": 1,
+                                            "item_id": "2",
+                                            "name_product": "TOMAT",
+                                            "qty": 1,
+                                            "price": "19,900.00",
+                                            "tax": "1,990.00",
+                                            "subtotal": "21,890.00"
+                                        }
+                                    },
+                                    "user": {
+                                        "id": 4,
+                                        "email": "rhezapandyaa@gmail.com"
+                                    },
+                                    "createOrder": {
+                                        "user_id": "4",
+                                        "cart": "{\"1\":{\"rowId\":1,\"item_id\":\"2\",\"name_product\":\"TOMAT\",\"qty\":1,\"price\":\"19,900.00\",\"tax\":\"1,990.00\",\"subtotal\":\"21,890.00\"}}",
+                                        "price_total": "21890.00",
+                                        "discount_id": null,
+                                        "final_price": "21890.00",
+                                        "payment_type": "Bank Transfer BCA",
+                                        "shipment_address": "Jatinangor"
+                                    }
+                                }
+                            }
+                        }
+                    },
+                    "404": {
+                        "description": "User's Shopping Carts is Empty",
+                        "content": {
+                            "application/json": {
+                                "example": {
+                                    "status": false,
+                                    "message": "Carts Empty"
+                                }
+                            }
+                        }
+                    },
+                    "422": {
+                        "description": "Validation Failed or User Not Registered",
+                        "content": {
+                            "application/json": {
+                                "example": {
+                                    "status": false,
+                                    "message": "Validation not fulfilled or You have not registered yet!",
+                                    "errors": {
+                                        "user_id": [
+                                            "The user_id field must be a integer"
+                                        ],
+                                        "payment_method": [
+                                            "The payment_method field must be a string"
+                                        ],
+                                        "shipment_address": [
+                                            "The shipment_address field must be a string"
+                                        ]
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        }
+    }
+}

@@ -1,0 +1,102 @@
+{
+    "openapi": "3.0.0",
+    "info": {
+        "title": "Get User's Checkout API",
+        "version": "1.0.0"
+    },
+    "paths": {
+        "/api/checkout": {
+            "get": {
+                "summary": "Get User's Checkout",
+                "description": "Endpoint to retrieve checkout from a user by ID.",
+                "parameters": [
+                    {
+                        "name": "user_id",
+                        "in": "body",
+                        "description": "ID of user",
+                        "required": true,
+                        "schema": {
+                            "type": "integer"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Success",
+                        "content": {
+                            "application/json": {
+                                "example": {
+                                    "status": true,
+                                    "message": "rhezapandya's Order",
+                                    "orders": [
+                                        {
+                                            "id": 1,
+                                            "user_id": 4,
+                                            "cart": "{\"1\":{\"rowId\":1,\"item_id\":\"1\",\"name_product\":\"GRILLTIDER\",\"qty\":1,\"price\":\"59,900.00\",\"tax\":\"5,990.00\",\"subtotal\":\"65,890.00\"},\"2\":{\"rowId\":2,\"item_id\":\"2\",\"name_product\":\"TOMAT\",\"qty\":1,\"price\":\"19,900.00\",\"tax\":\"1,990.00\",\"subtotal\":\"21,890.00\"}}",
+                                            "price_total": "87780.00",
+                                            "discount_id": null,
+                                            "final_price": "87780.00",
+                                            "transaction_id": 1,
+                                            "payment_type": "Bank Transfer BCA",
+                                            "status_payment": "CONFIRMED",
+                                            "image_payment": "img_payment/VIJNk3vve07d2ykCYk7y2wJ2GAwbjwXzs7CiZojl.png",
+                                            "shipment_id": 1,
+                                            "shipment_status": "ARRIVED",
+                                            "shipment_address": "Jatinangor",
+                                            "created_at": "2023-10-22T08:22:45.000000Z",
+                                            "updated_at": "2023-10-25T16:37:01.000000Z"
+                                        },
+                                        {
+                                            "id": 2,
+                                            "user_id": 4,
+                                            "cart": "{\"1\":{\"rowId\":1,\"item_id\":\"2\",\"name_product\":\"TOMAT\",\"qty\":3,\"price\":\"59,700.00\",\"tax\":\"5,970.00\",\"subtotal\":\"65,670.00\"}}",
+                                            "price_total": "65670.00",
+                                            "discount_id": null,
+                                            "final_price": "65670.00",
+                                            "transaction_id": 2,
+                                            "payment_type": "Bank Transfer BCA",
+                                            "status_payment": "CONFIRMED",
+                                            "image_payment": "img_payment/nW0YHvFWMShPbbsFOwO4fwy6Rp3AJpl3EQxbNMwv.png",
+                                            "shipment_id": 2,
+                                            "shipment_status": "SHIPPING",
+                                            "shipment_address": "Jatinangor",
+                                            "created_at": "2023-10-22T08:46:46.000000Z",
+                                            "updated_at": "2023-10-25T16:36:45.000000Z"
+                                        }
+                                    ]
+                                }
+                            }
+                        }
+                    },
+                    "404": {
+                        "description": "Order on Checkout is Empty",
+                        "content": {
+                            "application/json": {
+                                "example": {
+                                    "status": false,
+                                    "message": "Order Empty"
+                                }
+                            }
+                        }
+                    },
+                    "422": {
+                        "description": "Validation Failed, User Not Registered, or No Order on Checkout",
+                        "content": {
+                            "application/json": {
+                                "example": {
+                                    "status": false,
+                                    "message": "Validation not fulfilled, You have not registered yet!, or You have no orders!",
+                                    "errors": {
+                                        "user_id": [
+                                            "The user_id field must be a integer"
+                                        ]
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        }
+    }
+}

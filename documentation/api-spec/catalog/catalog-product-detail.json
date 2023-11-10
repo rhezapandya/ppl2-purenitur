@@ -1,0 +1,101 @@
+{
+    "openapi": "3.0.0",
+    "info": {
+        "title": "Get Product's Detail API",
+        "version": "1.0.0"
+    },
+    "paths": {
+        "/api/product-detail/{name_product}": {
+            "get": {
+                "summary": "Get Product's Detail",
+                "description": "Endpoint to retrieve the product's detail by product name.",
+                "parameters": [
+                    {
+                        "name": "name_product",
+                        "in": "path",
+                        "description": "Name of product",
+                        "required": true,
+                        "schema": {
+                            "type": "string"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Success",
+                        "content": {
+                            "application/json": {
+                                "example": {
+                                    "status": true,
+                                    "products": [
+                                        {
+                                            "id": 2,
+                                            "name_product": "TOMAT",
+                                            "category": "Alat Dapur",
+                                            "sku": "PRNTNRALD002",
+                                            "price": "19900.00",
+                                            "image": "https://d2xjmi1k71iy2m.cloudfront.net/dairyfarm/id/images/477/1147771_PE883455_S4.jpg",
+                                            "rating": "4.0",
+                                            "sold": 6,
+                                            "created_at": "2023-10-21T15:14:09.000000Z",
+                                            "updated_at": "2023-10-21T15:14:09.000000Z",
+                                            "feature_1": "Botol semprot",
+                                            "feature_2": " hijau muda",
+                                            "feature_3": " 35 cl",
+                                            "feature_4": ""
+                                        }
+                                    ],
+                                    "catalogs": [
+                                        {
+                                            "id": 94,
+                                            "name_product": "VÄDRA",
+                                            "category": "Sprei",
+                                            "sku": "PRNTNRSPR095",
+                                            "price": "129000.00",
+                                            "image": "https://d2xjmi1k71iy2m.cloudfront.net/dairyfarm/id/images/569/1056918_PE848648_S4.jpg",
+                                            "rating": "4.7",
+                                            "sold": 0,
+                                            "created_at": "2023-10-21T15:14:09.000000Z",
+                                            "updated_at": "2023-10-21T15:14:09.000000Z"
+                                        },
+                                        {
+                                            "id": 72,
+                                            "name_product": "BAGGMUCK",
+                                            "category": "Lain-Lain",
+                                            "sku": "PRNTNRDLL072",
+                                            "price": "79900.00",
+                                            "image": "https://d2xjmi1k71iy2m.cloudfront.net/dairyfarm/id/images/543/1154304_PE885978_S4.jpg",
+                                            "rating": "4.4",
+                                            "sold": 0,
+                                            "created_at": "2023-10-21T15:14:09.000000Z",
+                                            "updated_at": "2023-10-21T15:14:09.000000Z"
+                                        },
+                                        {
+                                            "etc": "etc.."
+                                        }
+                                    ]
+                                }
+                            }
+                        }
+                    },
+                    "422": {
+                        "description": "Validation Failed or Product not found",
+                        "content": {
+                            "application/json": {
+                                "example": {
+                                    "status": false,
+                                    "message": "Validation not fulfilled or Product not found",
+                                    "errors": {
+                                        "name_product": [
+                                            "The name_product field must be a string"
+                                        ]
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        }
+    }
+}
