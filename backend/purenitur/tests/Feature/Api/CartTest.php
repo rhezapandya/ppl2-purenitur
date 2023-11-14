@@ -5,15 +5,13 @@ namespace Tests\Feature\Api;
 use Tests\TestCase;
 use App\Models\User;
 use App\Models\ShoppingCart;
-use App\Http\Controllers\Api\CartController;
-use Illuminate\Http\Request;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 
 class CartTest extends TestCase
 {
     use RefreshDatabase;
 
-    public function test_users_can_show_cart()
+    public function test_users_can_show_cart(): void
     {
         $user = User::factory()->create();
 
@@ -45,7 +43,7 @@ class CartTest extends TestCase
             ]);
     }
 
-    public function test_users_can_add_item_to_cart()
+    public function test_users_can_add_item_to_cart(): void
     {
         $user = User::factory()->create();
         
@@ -88,7 +86,7 @@ class CartTest extends TestCase
         ]);
     }
 
-    public function test_users_can_increase_quantity_item_in_cart()
+    public function test_users_can_increase_quantity_item_in_cart(): void
     {
         $user = User::factory()->create();
 
@@ -130,7 +128,7 @@ class CartTest extends TestCase
         ]);
     }
 
-    public function test_users_can_decrease_quantity_item_in_cart()
+    public function test_users_can_decrease_quantity_item_in_cart(): void
     {
         $user = User::factory()->create();
 

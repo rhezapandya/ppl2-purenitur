@@ -4,14 +4,13 @@ namespace Tests\Feature\Api;
 
 use App\Models\User;
 use Illuminate\Foundation\Testing\RefreshDatabase;
-use Illuminate\Foundation\Testing\WithFaker;
 use Tests\TestCase;
 
 class AuthenticationTest extends TestCase
 {
     use RefreshDatabase;
 
-    public function test_users_can_login_with_valid_data()
+    public function test_users_can_login_with_valid_data(): void
     {
         $user = User::factory()->create();
 
@@ -25,7 +24,7 @@ class AuthenticationTest extends TestCase
         $response->assertStatus(201)->assertJsonStructure(['user', 'token']);
     }
 
-    public function test_users_can_not_login_with_invalid_data()
+    public function test_users_can_not_login_with_invalid_data(): void
     {
         $user = User::factory()->create();
 
@@ -39,7 +38,7 @@ class AuthenticationTest extends TestCase
         $response->assertStatus(404);
     }
 
-    public function test_users_can_logout()
+    public function test_users_can_logout(): void
     {
         $this->assertTrue(true);
     }

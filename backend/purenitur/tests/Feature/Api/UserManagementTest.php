@@ -4,14 +4,13 @@ namespace Tests\Feature\Api;
 
 use App\Models\User;
 use Illuminate\Foundation\Testing\RefreshDatabase;
-use Illuminate\Foundation\Testing\WithFaker;
 use Tests\TestCase;
 
 class UserManagementTest extends TestCase
 {
     use RefreshDatabase;
 
-    public function test_users_can_update_data()
+    public function test_users_can_update_data(): void
     {
         $user = User::factory()->create();
 
@@ -44,7 +43,7 @@ class UserManagementTest extends TestCase
         ]);
     }
 
-    public function test_users_can_delete_account()
+    public function test_users_can_delete_account(): void
     {
         $user = User::factory()->create();
 

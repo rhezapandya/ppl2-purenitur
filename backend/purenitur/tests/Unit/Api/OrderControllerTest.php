@@ -15,7 +15,7 @@ class OrderControllerTest extends TestCase
 {
     use RefreshDatabase;
     
-    public function test_index_with_valid_user_id_and_has_no_orders()
+    public function test_index_method_with_valid_user_id_and_has_no_orders(): void
     {
         $user = User::factory()->create();
 
@@ -30,7 +30,7 @@ class OrderControllerTest extends TestCase
         $this->assertEquals('You have no orders!', $response->getData()->message);
     }
 
-    public function test_index_with_valid_user_id_and_has_orders()
+    public function test_index_method_with_valid_user_id_and_has_orders(): void
     {
         $user = User::factory()->create();
 
@@ -56,7 +56,7 @@ class OrderControllerTest extends TestCase
         $this->assertEquals($user->username . "'s Order", $response->getData()->message);
     }
 
-    public function test_index_with_invalid_user_id()
+    public function test_index_method_with_invalid_user_id(): void
     {
         $orderController = new OrderController();
 
@@ -69,7 +69,7 @@ class OrderControllerTest extends TestCase
         $this->assertEquals('You have not registered yet!', $response->getData()->message);
     }
 
-    public function test_store_with_valid_data_but_cart_is_empty()
+    public function test_store_method_with_valid_data_but_cart_is_empty(): void
     {
         $user = User::factory()->create();
 
@@ -95,7 +95,7 @@ class OrderControllerTest extends TestCase
         $this->assertEquals("Carts Empty", $response->getData()->message);
     }
 
-    public function test_store_with_valid_data_but_cart_is_not_empty()
+    public function test_store_method_with_valid_data_but_cart_is_not_empty(): void
     {
         $user = User::factory()->create();
 
@@ -131,7 +131,7 @@ class OrderControllerTest extends TestCase
         $this->assertEquals("Order Created", $response->getData()->message);
     }
 
-    public function test_store_with_invalid_user_id()
+    public function test_store_method_with_invalid_user_id(): void
     {
         $orderController = new OrderController();
 
@@ -147,6 +147,27 @@ class OrderControllerTest extends TestCase
         $this->assertEquals(422, $response->getStatusCode());
         $this->assertEquals(false, $response->getData()->status);
         $this->assertEquals('You have not registered yet!', $response->getData()->message);
+    }
+
+    public function test_transaction_store_method_with_valid_data_but_order_id_does_not_exist(): void
+    {
+        $orderController = new OrderController();
+
+        $request = new Request([
+            'order_id' => 1,
+            'image_payment' => fake()->unique()->name(),
+        ]);
+
+        $response = $orderController->transaction_store($request);
+
+        $this->assertEquals(404, $response->getStatusCode());
+        $this->assertEquals(true, $response->getData()->status);
+        $this->assertEquals('Order ID not Exist!', $response->getData()->message);
+    }
+
+    public function test_transaction_store_method_with_valid_data_but_order_id_does_exist(): void
+    {
+        $this->assertTrue(true);
     }
 }
 

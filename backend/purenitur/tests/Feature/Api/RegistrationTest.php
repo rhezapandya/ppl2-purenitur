@@ -3,7 +3,6 @@
 namespace Tests\Feature\Api;
 
 use Tests\TestCase;
-use App\Models\User;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 
 class RegistrationTest extends TestCase
