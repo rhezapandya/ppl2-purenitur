@@ -1,10 +1,33 @@
 /* eslint-disable no-unused-vars */
-import React from "react";
+import React, { useState, useEffect } from "react";
 import Navbar from "../Components/Navbar";
 import Footer from "../Components/Footer";
 import Card from "../Components/Card";
+import axios from "axios";
 
 function Catalog({ category }) {
+  const [products, setProducts] = useState([]);
+
+  if (category) {
+    const client = axios.create({
+      baseURL: `http://127.0.0.1:8000/api/catalog/${category}`,
+    });
+    useEffect(() => {
+      client.get().then((response) => {
+        setProducts(response.data.products);
+      });
+    }, [category]);
+  } else {
+    const client = axios.create({
+      baseURL: "http://127.0.0.1:8000/api/catalog",
+    });
+    useEffect(() => {
+      client.get().then((response) => {
+        setProducts(response.data.products);
+      });
+    }, [category]);
+  }
+
   return (
     <div className="min-h-screen">
       <Navbar />
@@ -104,14 +127,17 @@ function Catalog({ category }) {
         </div>
       </div>
       <div className="grid grid-cols-5 gap-6 mx-20 mb-10">
-        <Card />
-        <Card />
-        <Card />
-        <Card />
-        <Card />
-        <Card />
-        <Card />
-        <Card />
+        {products.map((product) => (
+          <Card
+            name={product.name_product}
+            id={product.id}
+            category={product.category}
+            price={product.price}
+            image={product.image}
+            rating={product.rating}
+            sold={product.sold}
+          />
+        ))}
       </div>
       <Footer />
     </div>
