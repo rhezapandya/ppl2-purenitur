@@ -1,0 +1,68 @@
+{
+    "openapi": "3.0.0",
+    "info": {
+        "title": "Delete User API",
+        "version": "1.0.0"
+    },
+    "paths": {
+        "/api/users/{id}": {
+            "delete": {
+                "summary": "Delete User",
+                "description": "Endpoint to delete user by user ID.",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "body",
+                        "description": "ID of user",
+                        "required": true,
+                        "schema": {
+                            "type": "integer"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Success",
+                        "content": {
+                            "application/json": {
+                                "example": {
+                                    "status": true,
+                                    "message": "User Deleted successfully!",
+                                    "users": 1
+                                }
+                            }
+                        }
+                    },
+                    "404": {
+                        "description": "User not Found",
+                        "content": {
+                            "application/json": {
+                                "example": {
+                                    "status": false,
+                                    "message": "User not Found!"
+                                }
+                            }
+                        }
+                    },
+                    "422": {
+                        "description": "Validation not fulfilled",
+                        "content": {
+                            "application/json": {
+                                "example-1": {
+                                    "status": false,
+                                    "message": "Validation not fulfilled!",
+                                    "errors": {
+                                        "id": [
+                                            "The id field is required.",
+                                            "The id field must be a integer."
+                                        ]
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        }
+    }
+}

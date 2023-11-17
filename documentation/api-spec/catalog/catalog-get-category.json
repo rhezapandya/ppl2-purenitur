@@ -1,0 +1,84 @@
+{
+    "openapi": "3.0.0",
+    "info": {
+        "title": "Get Product Catalog by Category API",
+        "version": "1.0.0"
+    },
+    "paths": {
+        "/api/catalog/{category}": {
+            "get": {
+                "summary": "Get Product Catalog by Category",
+                "description": "Endpoint to retrieve the products catalog by category.",
+                "parameters": [
+                    {
+                        "name": "category",
+                        "in": "path",
+                        "description": "Category of products",
+                        "required": true,
+                        "schema": {
+                            "type": "string",
+                            "maximum": 255
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Success",
+                        "content": {
+                            "application/json": {
+                                "example": {
+                                    "status": true,
+                                    "products": [
+                                        {
+                                            "id": 80,
+                                            "name_product": "OLSERÖD",
+                                            "category": "Meja",
+                                            "sku": "PRNTNRMJA081",
+                                            "price": "499000.00",
+                                            "image": "https://d2xjmi1k71iy2m.cloudfront.net/dairyfarm/id/images/508/1150823_PE884681_S4.jpg",
+                                            "rating": "3.8",
+                                            "sold": 0,
+                                            "created_at": "2023-10-21T15:14:09.000000Z",
+                                            "updated_at": "2023-10-21T15:14:09.000000Z"
+                                        },
+                                        {
+                                            "id": 81,
+                                            "name_product": "OLSERÖD",
+                                            "category": "Meja",
+                                            "sku": "PRNTNRMJA082",
+                                            "price": "499000.00",
+                                            "image": "https://d2xjmi1k71iy2m.cloudfront.net/dairyfarm/id/images/508/1150822_PE884680_S4.jpg",
+                                            "rating": "4.8",
+                                            "sold": 0,
+                                            "created_at": "2023-10-21T15:14:09.000000Z",
+                                            "updated_at": "2023-10-21T15:14:09.000000Z"
+                                        },
+                                        {
+                                            "etc": "etc.."
+                                        }
+                                    ]
+                                }
+                            }
+                        }
+                    },
+                    "422": {
+                        "description": "Validation Failed or Category not found",
+                        "content": {
+                            "application/json": {
+                                "example": {
+                                    "status": false,
+                                    "message": "Validation not fulfilled or Category not found",
+                                    "errors": {
+                                        "category": [
+                                            "The category field must be a string"
+                                        ]
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        }
+    }
+}

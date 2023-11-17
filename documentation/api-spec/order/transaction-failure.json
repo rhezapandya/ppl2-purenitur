@@ -1,0 +1,89 @@
+{
+    "openapi": "3.0.0",
+    "info": {
+        "title": "Failure Transaction on User's Checkout API",
+        "version": "1.0.0"
+    },
+    "paths": {
+        "/api/checkout/payment/failure": {
+            "post": {
+                "summary": "Failure Transaction on 's Checkout",
+                "description": "Endpoint to failure a transaction on user's checkout by order ID.",
+                "parameters": [
+                    {
+                        "name": "order_id",
+                        "in": "body",
+                        "description": "ID of order",
+                        "required": true,
+                        "schema": {
+                            "type": "integer"
+                        }
+                    },
+                    {
+                        "name": "status_payment",
+                        "in": "body",
+                        "description": "Status Payment = FAILED",
+                        "required": true,
+                        "schema": {
+                            "type": "string",
+                            "maximum": 255,
+                            "in": "FAILED"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Success",
+                        "content": {
+                            "application/json": {
+                                "example": {
+                                    "status": true,
+                                    "message": "Transaction Payment Confirmation Failed. Order Updated!"
+                                }
+                            }
+                        }
+                    },
+                    "404": {
+                        "description": "Order ID not Exists, Order Already Confirmed, or Order Already Failed",
+                        "content": {
+                            "application/json": {
+                                "example": {
+                                    "status": false,
+                                    "message": "Order ID not Exist!"
+                                },
+                                "example2": {
+                                    "status": false,
+                                    "message": "Orders already Confirmed!"
+                                },
+                                "example3": {
+                                    "status": false,
+                                    "message": "Orders already Failed!"
+                                }
+                            }
+                        }
+                    },
+                    "422": {
+                        "description": "Validation Failed",
+                        "content": {
+                            "application/json": {
+                                "example": {
+                                    "status": false,
+                                    "message": "Validation not fulfilled!",
+                                    "errors": {
+                                        "order_id": [
+                                            "The order_id field must be a integer"
+                                        ],
+                                        "status_payment": [
+                                            "The status_payment field must be a string",
+                                            "The status_payment field must be in CONFIRMED"
+                                        ]
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        }
+    }
+}
