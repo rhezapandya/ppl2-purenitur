@@ -11,6 +11,15 @@
                 "description": "Endpoint to update a shipment on user's shipping order by order ID.",
                 "parameters": [
                     {
+                        "name": "user_login",
+                        "in": "Authorization",
+                        "description": "Token of user login",
+                        "required": true,
+                        "schema": {
+                            "type": "string"
+                        }
+                    },
+                    {
                         "name": "order_id",
                         "in": "body",
                         "description": "ID of order",
@@ -72,6 +81,22 @@
                                         "shipment_status": [
                                             "The shipment_status field must be a string",
                                             "The shipment_status field must be in ARRIVED"
+                                        ]
+                                    }
+                                }
+                            }
+                        }
+                    },
+                    "401": {
+                        "description": "User not logged in",
+                        "content": {
+                            "application/json": {
+                                "example": {
+                                    "status": false,
+                                    "message": "User not logged in",
+                                    "errors": {
+                                        "reroute": [
+                                            "Reroute to login page."
                                         ]
                                     }
                                 }

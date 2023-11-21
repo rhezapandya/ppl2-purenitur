@@ -11,6 +11,15 @@
                 "description": "Endpoint to update user by user ID.",
                 "parameters": [
                     {
+                        "name": "user_login",
+                        "in": "Authorization",
+                        "description": "Token of user login",
+                        "required": true,
+                        "schema": {
+                            "type": "string"
+                        }
+                    },
+                    {
                         "name": "id",
                         "in": "body",
                         "description": "ID of user",
@@ -155,6 +164,31 @@
                                             "The telephone field is required.",
                                             "The telephone field must be a string.",
                                             "The telephone field must not be greater than 14 characters."
+                                        ]
+                                    }
+                                }
+                            }
+                        }
+                    },
+                    "401": {
+                        "description": "User not logged in or user not admin",
+                        "content": {
+                            "application/json": {
+                                "example": {
+                                    "status": false,
+                                    "message": "User not logged in",
+                                    "errors": {
+                                        "reroute": [
+                                            "Reroute to login page."
+                                        ]
+                                    }
+                                },
+                                "example2": {
+                                    "status": false,
+                                    "message": "User not admin",
+                                    "errors": {
+                                        "reroute": [
+                                            "Reroute to dashboard."
                                         ]
                                     }
                                 }

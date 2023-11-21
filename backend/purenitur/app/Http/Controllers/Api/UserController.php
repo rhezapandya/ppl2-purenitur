@@ -29,7 +29,7 @@ class UserController extends Controller
             'token' => $token
         ];
 
-        return response($response, 201);
+        return response($response, 200);
     }
 
     /**
@@ -42,7 +42,7 @@ class UserController extends Controller
             return response()->json([
                 'status' => false,
                 'message' => 'User not login yet!',
-            ], 422);
+            ], 401);
         } else {
             return response()->json([
                 'status' => true,
