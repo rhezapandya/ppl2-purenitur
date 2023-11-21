@@ -9,6 +9,17 @@
             "get": {
                 "summary": "Get All Users",
                 "description": "Endpoint to retrieve all users.",
+                "parameters": [
+                    {
+                        "name": "user_login",
+                        "in": "Authorization",
+                        "description": "Token of user login",
+                        "required": true,
+                        "schema": {
+                            "type": "string"
+                        }
+                    }
+                ],
                 "responses": {
                     "200": {
                         "description": "Success",
@@ -60,6 +71,31 @@
                                 "example": {
                                     "status": false,
                                     "message": "User not found!"
+                                }
+                            }
+                        }
+                    },
+                    "401": {
+                        "description": "User not logged in or user not admin",
+                        "content": {
+                            "application/json": {
+                                "example": {
+                                    "status": false,
+                                    "message": "User not logged in",
+                                    "errors": {
+                                        "reroute": [
+                                            "Reroute to login page."
+                                        ]
+                                    }
+                                },
+                                "example2": {
+                                    "status": false,
+                                    "message": "User not admin",
+                                    "errors": {
+                                        "reroute": [
+                                            "Reroute to dashboard."
+                                        ]
+                                    }
                                 }
                             }
                         }

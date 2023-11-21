@@ -1,0 +1,67 @@
+{
+    "openapi": "3.0.0",
+    "info": {
+        "title": "Login API",
+        "version": "1.0.0"
+    },
+    "paths": {
+        "/api/login": {
+            "post": {
+                "summary": "Login",
+                "description": "Endpoint to Login.",
+                "parameters": [
+                    {
+                        "name": "email",
+                        "in": "body",
+                        "description": "Email of user",
+                        "required": true
+                    },
+                    {
+                        "name": "password",
+                        "in": "body",
+                        "description": "Password of user account",
+                        "required": true
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Success",
+                        "content": {
+                            "application/json": {
+                                "example": {
+                                    "user": {
+                                        "id": 4,
+                                        "email": "rhezapandyaa@gmail.com",
+                                        "username": "rhezapandya",
+                                        "first_name": "Rheza",
+                                        "last_name": "Pansdy",
+                                        "gender": "M",
+                                        "address": "Jatinangors",
+                                        "telephone": "082100000000",
+                                        "is_admin": "1",
+                                        "email_verified_at": null,
+                                        "created_at": "2023-11-21T16:23:16.000000Z",
+                                        "updated_at": "2023-11-21T16:57:03.000000Z"
+                                    },
+                                    "token": "8|wrmBO6O8JLfYiz53zP63OAaVqhng4ZPnor4eCuFe7f80a2dc"
+                                }
+                            }
+                        }
+                    },
+                    "404": {
+                        "description": "User not match!",
+                        "content": {
+                            "application/json": {
+                                "example": {
+                                    "message": [
+                                        "These credentials do not match our records."
+                                    ]
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        }
+    }
+}
