@@ -12,21 +12,38 @@ class DiscountController extends Controller
     /**
      * Display a listing of the resource.
      */
-    public function index()
+    public function index(Request $request)
     {
-        $discounts = Discount::all();
+        $user_login = $request->user();
+        if ($user_login && $user_login->currentAccessToken()) {
+            $accessToken = $user_login->currentAccessToken()->token;
 
-        if ($discounts) {
-            return response()->json([
-                'status' => true,
-                'message' => "Show All Discounts!",
-                'discounts' => $discounts
-            ], 200);
+            if ($user_login->is_admin === '1') {
+                $discounts = Discount::all();
+
+                if ($discounts) {
+                    return response()->json([
+                        'status' => true,
+                        'message' => "Show All Discounts!",
+                        'discounts' => $discounts
+                    ], 200);
+                } else {
+                    return response()->json([
+                        'status' => false,
+                        'message' => 'Discount not found!',
+                    ], 422);
+                }
+            } else {
+                return response()->json([
+                    'status' => false,
+                    'message' => 'User not admin',
+                ], 401);
+            }
         } else {
             return response()->json([
                 'status' => false,
-                'message' => 'Discount not found!',
-            ], 422);
+                'message' => 'User not logged in',
+            ], 401);
         }
     }
 
