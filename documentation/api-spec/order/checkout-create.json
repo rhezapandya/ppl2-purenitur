@@ -11,6 +11,15 @@
                 "description": "Endpoint to create a checkout from a user by ID.",
                 "parameters": [
                     {
+                        "name": "user_login",
+                        "in": "Authorization",
+                        "description": "Token of user login",
+                        "required": true,
+                        "schema": {
+                            "type": "string"
+                        }
+                    },
+                    {
                         "name": "user_id",
                         "in": "body",
                         "description": "ID of user",
@@ -111,6 +120,22 @@
                                         ],
                                         "shipment_address": [
                                             "The shipment_address field must be a string"
+                                        ]
+                                    }
+                                }
+                            }
+                        }
+                    },
+                    "401": {
+                        "description": "User not logged in",
+                        "content": {
+                            "application/json": {
+                                "example": {
+                                    "status": false,
+                                    "message": "User not logged in",
+                                    "errors": {
+                                        "reroute": [
+                                            "Reroute to login page."
                                         ]
                                     }
                                 }

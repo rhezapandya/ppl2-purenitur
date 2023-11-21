@@ -1,14 +1,14 @@
 {
     "openapi": "3.0.0",
     "info": {
-        "title": "Get User's Shopping Cart API",
+        "title": "Delete Discount API",
         "version": "1.0.0"
     },
     "paths": {
-        "/api/cart": {
-            "get": {
-                "summary": "Get User's Shopping Cart",
-                "description": "Endpoint to retrieve the contents of a user's shopping cart.",
+        "/api/admin/discount/delete/{id}": {
+            "delete": {
+                "summary": "Delete Discount",
+                "description": "Endpoint to delete discount on discount ID.",
                 "parameters": [
                     {
                         "name": "user_login",
@@ -20,14 +20,10 @@
                         }
                     },
                     {
-                        "name": "email",
-                        "in": "body",
-                        "description": "Email of the user",
-                        "required": true,
-                        "schema": {
-                            "type": "string",
-                            "format": "email"
-                        }
+                        "name": "discount_id",
+                        "in": "path",
+                        "description": "ID of discount",
+                        "required": true
                     }
                 ],
                 "responses": {
@@ -37,40 +33,25 @@
                             "application/json": {
                                 "example": {
                                     "status": true,
-                                    "message": "rhezapandya's Shopping Cart",
-                                    "carts": {
-                                        "1": {
-                                            "rowId": 1,
-                                            "item_id": "2",
-                                            "name_product": "TOMAT",
-                                            "qty": 1,
-                                            "price": "19,900.00",
-                                            "tax": "1,990.00",
-                                            "subtotal": "21,890.00"
-                                        }
-                                    }
+                                    "message": "Discount Deleted successfully!",
+                                    "discount": 1
                                 }
                             }
                         }
                     },
-                    "422": {
-                        "description": "Validation Failed or Cart Not Found",
+                    "404": {
+                        "description": "Discount Unavailable",
                         "content": {
                             "application/json": {
                                 "example": {
                                     "status": false,
-                                    "message": "Validation not fulfilled or Cart not found",
-                                    "errors": {
-                                        "email": [
-                                            "The email field is required."
-                                        ]
-                                    }
+                                    "message": "Discount Unavailable!"
                                 }
                             }
                         }
                     },
                     "401": {
-                        "description": "User not logged in",
+                        "description": "User not logged in or user not admin",
                         "content": {
                             "application/json": {
                                 "example": {
@@ -79,6 +60,15 @@
                                     "errors": {
                                         "reroute": [
                                             "Reroute to login page."
+                                        ]
+                                    }
+                                },
+                                "example2": {
+                                    "status": false,
+                                    "message": "User not admin",
+                                    "errors": {
+                                        "reroute": [
+                                            "Reroute to dashboard."
                                         ]
                                     }
                                 }

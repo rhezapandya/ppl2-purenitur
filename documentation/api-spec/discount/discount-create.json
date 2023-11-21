@@ -1,14 +1,14 @@
 {
     "openapi": "3.0.0",
     "info": {
-        "title": "Delete Product API",
+        "title": "Create Discount API",
         "version": "1.0.0"
     },
     "paths": {
-        "/api/admin/products/delete/{id}": {
-            "delete": {
-                "summary": "Delete Product",
-                "description": "Endpoint to delete product on product ID.",
+        "/api/admin/discount/create": {
+            "post": {
+                "summary": "Create Discount",
+                "description": "Endpoint to create  Discount.",
                 "parameters": [
                     {
                         "name": "user_login",
@@ -20,12 +20,29 @@
                         }
                     },
                     {
-                        "name": "id",
-                        "in": "path",
-                        "description": "ID of product",
+                        "name": "discount_name",
+                        "in": "body",
+                        "description": "Checking for existing name of a discount",
+                        "required": true
+                    },
+                    {
+                        "name": "name_discount",
+                        "in": "body",
+                        "description": "Name of New Discount",
                         "required": true,
                         "schema": {
-                            "type": "integer"
+                            "type": "string",
+                            "maximum": 255
+                        }
+                    },
+                    {
+                        "name": "percentage",
+                        "in": "body",
+                        "description": "Percentage of New Discount",
+                        "required": true,
+                        "schema": {
+                            "type": "integer",
+                            "maximum": 100
                         }
                     }
                 ],
@@ -36,35 +53,32 @@
                             "application/json": {
                                 "example": {
                                     "status": true,
-                                    "message": "Product Deleted successfully!",
-                                    "product": 1,
-                                    "product_detail": 1
-                                }
-                            }
-                        }
-                    },
-                    "404": {
-                        "description": "Product not Found",
-                        "content": {
-                            "application/json": {
-                                "example": {
-                                    "status": false,
-                                    "message": "Product not Found!"
+                                    "message": "Discount Created successfully!",
+                                    "discount": {
+                                        "name_discount": "Diskon A",
+                                        "percentage": 50,
+                                        "updated_at": "2023-11-10T09:41:25.000000Z",
+                                        "created_at": "2023-11-10T09:41:25.000000Z"
+                                    }
                                 }
                             }
                         }
                     },
                     "422": {
-                        "description": "Validation not Fulfilled",
+                        "description": "Validation not Fulfilled or Product (SKU) Already Exists!",
                         "content": {
                             "application/json": {
                                 "example": {
                                     "status": false,
                                     "message": "Validation not fulfilled!",
                                     "errors": {
-                                        "id": [
-                                            "The id field is required.",
-                                            "The id field must be a integer."
+                                        "name_discount": [
+                                            "The name_discount field must be a string.",
+                                            "The name_discount field must not be greater than 255 characters."
+                                        ],
+                                        "percentage": [
+                                            "The percentage field must be a number.",
+                                            "The percentage may not be greater than 999999999.99."
                                         ]
                                     }
                                 }

@@ -11,6 +11,15 @@
                 "description": "Endpoint to confirm a transaction on user's checkout by order ID.",
                 "parameters": [
                     {
+                        "name": "user_login",
+                        "in": "Authorization",
+                        "description": "Token of user login",
+                        "required": true,
+                        "schema": {
+                            "type": "string"
+                        }
+                    },
+                    {
                         "name": "order_id",
                         "in": "body",
                         "description": "ID of order",
@@ -72,6 +81,22 @@
                                         "status_payment": [
                                             "The status_payment field must be a string",
                                             "The status_payment field must be in CONFIRMED"
+                                        ]
+                                    }
+                                }
+                            }
+                        }
+                    },
+                    "401": {
+                        "description": "User not logged in",
+                        "content": {
+                            "application/json": {
+                                "example": {
+                                    "status": false,
+                                    "message": "User not logged in",
+                                    "errors": {
+                                        "reroute": [
+                                            "Reroute to login page."
                                         ]
                                     }
                                 }

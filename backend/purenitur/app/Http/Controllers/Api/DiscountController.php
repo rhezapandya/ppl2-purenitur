@@ -52,37 +52,54 @@ class DiscountController extends Controller
      */
     public function create(Request $request)
     {
-        $check_discount = Discount::where('name_discount', $request->discount_name)->first();
+        $user_login = $request->user();
+        if ($user_login && $user_login->currentAccessToken()) {
+            $accessToken = $user_login->currentAccessToken()->token;
 
-        if ($check_discount) {
-            return response()->json([
-                'status' => false,
-                'message' => "Discount already exists!",
-            ], 422);
-        } else {
-            $check_validation = Validator::make($request->all(), [
-                'name_discount' => ['string', 'max:255'],
-                'percentage' => ['integer', 'max:100'],
-            ]);
+            if ($user_login->is_admin === '1') {
+                $check_discount = Discount::where('name_discount', $request->discount_name)->first();
 
-            if ($check_validation->fails()) {
+                if ($check_discount) {
+                    return response()->json([
+                        'status' => false,
+                        'message' => "Discount already exists!",
+                    ], 422);
+                } else {
+                    $check_validation = Validator::make($request->all(), [
+                        'name_discount' => ['string', 'max:255'],
+                        'percentage' => ['integer', 'max:100'],
+                    ]);
+
+                    if ($check_validation->fails()) {
+                        return response()->json([
+                            'status' => false,
+                            'message' => 'Validation not fulfilled!',
+                            'errors' => $check_validation->errors(),
+                        ], 422);
+                    } else {
+                        $discounts = Discount::create([
+                            "name_discount" => $request->name_discount,
+                            "percentage" => $request->percentage,
+                        ]);
+
+                        return response()->json([
+                            'status' => true,
+                            'message' => "Discount Created successfully!",
+                            'discount' => $discounts,
+                        ], 200);
+                    }
+                }
+            } else {
                 return response()->json([
                     'status' => false,
-                    'message' => 'Validation not fulfilled!',
-                    'errors' => $check_validation->errors(),
-                ], 422);
-            } else {
-                $discounts = Discount::create([
-                    "name_discount" => $request->name_discount,
-                    "percentage" => $request->percentage,
-                ]);
-
-                return response()->json([
-                    'status' => true,
-                    'message' => "Discount Created successfully!",
-                    'discount' => $discounts,
-                ], 200);
+                    'message' => 'User not admin',
+                ], 401);
             }
+        } else {
+            return response()->json([
+                'status' => false,
+                'message' => 'User not logged in',
+            ], 401);
         }
     }
 
@@ -115,38 +132,55 @@ class DiscountController extends Controller
      */
     public function update(Request $request)
     {
-        $check_avail = Discount::find($request->discount_id);
+        $user_login = $request->user();
+        if ($user_login && $user_login->currentAccessToken()) {
+            $accessToken = $user_login->currentAccessToken()->token;
 
-        if ($check_avail) {
-            $check_validation = Validator::make($request->all(), [
-                'name_discount' => ['string', 'max:255'],
-                'percentage' => ['integer', 'max:100'],
-            ]);
+            if ($user_login->is_admin === '1') {
+                $check_avail = Discount::find($request->discount_id);
 
-            if ($check_validation->fails()) {
-                return response()->json([
-                    'status' => false,
-                    'message' => 'Validation not fulfilled!',
-                    'errors' => $check_validation->errors(),
-                ], 422);
-            } else {
-                $discount = Discount::where('id', $request->discount_id)
-                    ->update([
+                if ($check_avail) {
+                    $check_validation = Validator::make($request->all(), [
                         'name_discount' => ['string', 'max:255'],
                         'percentage' => ['integer', 'max:100'],
                     ]);
 
+                    if ($check_validation->fails()) {
+                        return response()->json([
+                            'status' => false,
+                            'message' => 'Validation not fulfilled!',
+                            'errors' => $check_validation->errors(),
+                        ], 422);
+                    } else {
+                        $discount = Discount::where('id', $request->discount_id)
+                            ->update([
+                                'name_discount' => ['string', 'max:255'],
+                                'percentage' => ['integer', 'max:100'],
+                            ]);
+
+                        return response()->json([
+                            'status' => true,
+                            'message' => "Discount Update successfully!",
+                            'discount' => $discount,
+                        ], 200);
+                    }
+                } else {
+                    return response()->json([
+                        'status' => true,
+                        'message' => "Discount Unavailable!",
+                    ], 404);
+                }
+            } else {
                 return response()->json([
-                    'status' => true,
-                    'message' => "Discount Update successfully!",
-                    'discount' => $discount,
-                ], 200);
+                    'status' => false,
+                    'message' => 'User not admin',
+                ], 401);
             }
         } else {
             return response()->json([
-                'status' => true,
-                'message' => "Discount Unavailable!",
-            ], 200);
+                'status' => false,
+                'message' => 'User not logged in',
+            ], 401);
         }
     }
 
@@ -155,22 +189,39 @@ class DiscountController extends Controller
      */
     public function destroy(Request $request)
     {
-        $check_avail = Discount::find($request->discount_id);
+        $user_login = $request->user();
+        if ($user_login && $user_login->currentAccessToken()) {
+            $accessToken = $user_login->currentAccessToken()->token;
 
-        if ($check_avail) {
-            $discount = Discount::where('id', $request->discount_id)
-                ->delete();
+            if ($user_login->is_admin === '1') {
+                $check_avail = Discount::find($request->discount_id);
 
-            return response()->json([
-                'status' => true,
-                'message' => "Discount Deleted successfully!",
-                'discount' => $discount,
-            ], 200);
+                if ($check_avail) {
+                    $discount = Discount::where('id', $request->discount_id)
+                        ->delete();
+
+                    return response()->json([
+                        'status' => true,
+                        'message' => "Discount Deleted successfully!",
+                        'discount' => $discount,
+                    ], 200);
+                } else {
+                    return response()->json([
+                        'status' => true,
+                        'message' => "Discount Unavailable!",
+                    ], 404);
+                }
+            } else {
+                return response()->json([
+                    'status' => false,
+                    'message' => 'User not admin',
+                ], 401);
+            }
         } else {
             return response()->json([
-                'status' => true,
-                'message' => "Discount Unavailable!",
-            ], 200);
+                'status' => false,
+                'message' => 'User not logged in',
+            ], 401);
         }
     }
 }
