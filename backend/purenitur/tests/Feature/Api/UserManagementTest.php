@@ -10,12 +10,27 @@ class UserManagementTest extends TestCase
 {
     use RefreshDatabase;
 
-    public function test_users_can_update_data(): void
+    public function test_admin_can_update_data(): void
     {
-        $user = User::factory()->create();
+        $admin = User::factory()->create([
+            'is_admin' => '1',
+        ]);
 
-        $userData = [
-            'id' => $user->id,
+        $loginData = [
+            'email' => $admin->email,
+            'password' => 'password',
+        ];
+        
+        $loginResponse = $this->post('/api/login', $loginData);
+
+        $token = $loginResponse['token'];
+
+        $headers = [
+            'Authorization' => 'Bearer ' . $token,
+        ];
+
+        $updateData = [
+            'id' => $admin->id,
             'password' => 'newpassword123',
             'password_confirmation' => 'newpassword123',
             'first_name' => 'newfirst',
@@ -25,16 +40,16 @@ class UserManagementTest extends TestCase
             'telephone' =>  '0987654321',
         ];
 
-        $response = $this->patch("/api/users/{$userData['id']}", $userData);
+        $updateResponse = $this->withHeaders($headers)->patch('/api/users/'.$updateData['id'], $updateData);
 
-        $response->assertStatus(200)
+        $updateResponse->assertStatus(200)
             ->assertJson([
                 'status' => true,
                 'message' => "User Update successfully!",
             ]);
 
         $this->assertDatabaseHas('users', [
-            'id' => $userData['id'],
+            'id' => $updateData['id'],
             'first_name' => 'newfirst',
             'last_name' => 'newlast',
             'gender' => 'M',
@@ -45,16 +60,31 @@ class UserManagementTest extends TestCase
 
     public function test_users_can_delete_account(): void
     {
-        $user = User::factory()->create();
+        $admin = User::factory()->create([
+            'is_admin' => '1',
+        ]);
 
-        $response = $this->delete("/api/users/{$user->id}");
+        $loginData = [
+            'email' => $admin->email,
+            'password' => 'password',
+        ];
+        
+        $loginResponse = $this->post('/api/login', $loginData);
 
-        $response->assertStatus(200)
+        $token = $loginResponse['token'];
+
+        $headers = [
+            'Authorization' => 'Bearer ' . $token,
+        ];
+
+        $deleteResponse = $this->withHeaders($headers)->delete('/api/users/'.$admin->id);
+
+        $deleteResponse->assertStatus(200)
             ->assertJson([
                 'status' => true,
                 'message' => "User Deleted successfully!",
             ]);
 
-        $this->assertDatabaseMissing('users', ['id' => $user->id]);
+        $this->assertDatabaseMissing('users', ['id' => $admin->id]);
     }
 }

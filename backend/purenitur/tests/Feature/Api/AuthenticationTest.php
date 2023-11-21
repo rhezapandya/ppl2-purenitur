@@ -3,12 +3,13 @@
 namespace Tests\Feature\Api;
 
 use App\Models\User;
+use Illuminate\Foundation\Testing\DatabaseTransactions;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use Tests\TestCase;
 
 class AuthenticationTest extends TestCase
 {
-    use RefreshDatabase;
+    use DatabaseTransactions;
 
     public function test_users_can_login_with_valid_data(): void
     {
@@ -40,6 +41,28 @@ class AuthenticationTest extends TestCase
 
     public function test_users_can_logout(): void
     {
-        $this->assertTrue(true);
+        $user = User::factory()->create();
+
+        $userData = [
+            'email' => $user->email,
+            'password' => 'password',
+        ];
+
+        $loginResponse = $this->postJson('/api/login', $userData);
+
+        $token = $loginResponse['token'];
+
+        $headers = [
+            'Authorization' => 'Bearer ' . $token,
+        ];
+
+        $logoutResponse = $this->withHeaders($headers)->postJson('/api/logout');
+
+        $logoutResponse->assertStatus(200)
+            ->assertJson([
+                'status' => true,
+                'message' => 'User Successfully Logged Out',
+            ]);
+        $this->assertFalse($user->tokens->contains('id', $token));
     }
 }
