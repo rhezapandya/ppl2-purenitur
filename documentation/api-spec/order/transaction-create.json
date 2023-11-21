@@ -1,0 +1,83 @@
+{
+    "openapi": "3.0.0",
+    "info": {
+        "title": "Create Transaction on User's Checkout API",
+        "version": "1.0.0"
+    },
+    "paths": {
+        "/api/checkout/payment": {
+            "post": {
+                "summary": "Create Transaction on 's Checkout",
+                "description": "Endpoint to create a transaction on user's checkout by order ID.",
+                "parameters": [
+                    {
+                        "name": "order_id",
+                        "in": "form-data",
+                        "description": "ID of order",
+                        "required": true,
+                        "schema": {
+                            "type": "integer"
+                        }
+                    },
+                    {
+                        "name": "image_payment",
+                        "in": "form-data",
+                        "description": "Transaction/Payment Image Proof",
+                        "required": true,
+                        "schema": {
+                            "mimes": "jpeg,jpg,png,jfif,pdf"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Success",
+                        "content": {
+                            "application/json": {
+                                "example": {
+                                    "status": true,
+                                    "message": "Transaction success. Order updated!"
+                                }
+                            }
+                        }
+                    },
+                    "404": {
+                        "description": "Order ID not Exists or Transaction Already Done",
+                        "content": {
+                            "application/json": {
+                                "example": {
+                                    "status": false,
+                                    "message": "Order ID not Exist!"
+                                },
+                                "example2": {
+                                    "status": false,
+                                    "message": "You have done your transaction already!",
+                                    "transaction_id": 3
+                                }
+                            }
+                        }
+                    },
+                    "422": {
+                        "description": "Validation Failed",
+                        "content": {
+                            "application/json": {
+                                "example": {
+                                    "status": false,
+                                    "message": "Validation not fulfilled!",
+                                    "errors": {
+                                        "order": [
+                                            "The order field must be a integer"
+                                        ],
+                                        "image_payment": [
+                                            "The image payment field must be a file of type: jpeg, jpg, png, jfif, pdf."
+                                        ]
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        }
+    }
+}

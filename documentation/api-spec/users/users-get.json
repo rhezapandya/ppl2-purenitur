@@ -1,0 +1,71 @@
+{
+    "openapi": "3.0.0",
+    "info": {
+        "title": "Get All Users API",
+        "version": "1.0.0"
+    },
+    "paths": {
+        "/api/users": {
+            "get": {
+                "summary": "Get All Users",
+                "description": "Endpoint to retrieve all users.",
+                "responses": {
+                    "200": {
+                        "description": "Success",
+                        "content": {
+                            "application/json": {
+                                "example": {
+                                    "status": true,
+                                    "users": [
+                                        {
+                                            "id": 1,
+                                            "email": "wildanhanif70@gmail.com",
+                                            "username": "wildanhanif",
+                                            "first_name": "Wildan",
+                                            "last_name": "Hanif",
+                                            "gender": "M",
+                                            "address": "Jatinangor",
+                                            "telephone": "082100000000",
+                                            "is_admin": "1",
+                                            "email_verified_at": null,
+                                            "created_at": "2023-10-21T15:14:09.000000Z",
+                                            "updated_at": "2023-10-21T15:14:09.000000Z"
+                                        },
+                                        {
+                                            "id": 2,
+                                            "email": "baswaraandi@gmail.com",
+                                            "username": "baswaraandi",
+                                            "first_name": "Andyka",
+                                            "last_name": "Baswara",
+                                            "gender": "M",
+                                            "address": "Jatinangor",
+                                            "telephone": "082100000000",
+                                            "is_admin": "1",
+                                            "email_verified_at": null,
+                                            "created_at": "2023-10-21T15:14:09.000000Z",
+                                            "updated_at": "2023-10-21T15:14:09.000000Z"
+                                        },
+                                        {
+                                            "etc": "etc.."
+                                        }
+                                    ]
+                                }
+                            }
+                        }
+                    },
+                    "422": {
+                        "description": "User not found!",
+                        "content": {
+                            "application/json": {
+                                "example": {
+                                    "status": false,
+                                    "message": "User not found!"
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        }
+    }
+}

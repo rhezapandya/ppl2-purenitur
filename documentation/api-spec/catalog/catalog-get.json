@@ -1,0 +1,67 @@
+{
+    "openapi": "3.0.0",
+    "info": {
+        "title": "Get Product Catalog API",
+        "version": "1.0.0"
+    },
+    "paths": {
+        "/api/catalog": {
+            "get": {
+                "summary": "Get Product Catalog",
+                "description": "Endpoint to retrieve the products catalog.",
+                "responses": {
+                    "200": {
+                        "description": "Success",
+                        "content": {
+                            "application/json": {
+                                "example": {
+                                    "status": true,
+                                    "products": [
+                                        {
+                                            "id": 1,
+                                            "name_product": "GRILLTIDER",
+                                            "category": "Alat Dapur",
+                                            "sku": "PRNTNRALD001",
+                                            "price": "59900.00",
+                                            "image": "https://d2xjmi1k71iy2m.cloudfront.net/dairyfarm/id/images/159/0815911_PE773102_S4.jpg",
+                                            "rating": "3.6",
+                                            "sold": 1,
+                                            "created_at": "2023-10-21T15:14:08.000000Z",
+                                            "updated_at": "2023-10-22T12:41:24.000000Z"
+                                        },
+                                        {
+                                            "id": 2,
+                                            "name_product": "TOMAT",
+                                            "category": "Alat Dapur",
+                                            "sku": "PRNTNRALD002",
+                                            "price": "19900.00",
+                                            "image": "https://d2xjmi1k71iy2m.cloudfront.net/dairyfarm/id/images/477/1147771_PE883455_S4.jpg",
+                                            "rating": "4.0",
+                                            "sold": 6,
+                                            "created_at": "2023-10-21T15:14:08.000000Z",
+                                            "updated_at": "2023-10-25T16:36:37.000000Z"
+                                        },
+                                        {
+                                            "etc": "etc.."
+                                        }
+                                    ]
+                                }
+                            }
+                        }
+                    },
+                    "422": {
+                        "description": "Products not found!",
+                        "content": {
+                            "application/json": {
+                                "example": {
+                                    "status": false,
+                                    "message": "Products not found!"
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        }
+    }
+}

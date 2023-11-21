@@ -1,0 +1,106 @@
+{
+    "openapi": "3.0.0",
+    "info": {
+        "title": "Decrease Product Quantity API",
+        "version": "1.0.0"
+    },
+    "paths": {
+        "/api/cart/dec-qty": {
+            "post": {
+                "summary": "Decrease Product Quantity",
+                "description": "Endpoint to decrease the quantity of an product in the user's shopping cart.",
+                "requestBody": {
+                    "required": true,
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "type": "object",
+                                "properties": {
+                                    "email": {
+                                        "type": "string",
+                                        "format": "email",
+                                        "description": "User's email"
+                                    },
+                                    "rowId": {
+                                        "type": "integer",
+                                        "description": "Item ID of the product to be updated"
+                                    }
+                                },
+                                "required": [
+                                    "email",
+                                    "rowId"
+                                ]
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "Success",
+                        "content": {
+                            "application/json": {
+                                "example": {
+                                    "status": true,
+                                    "message": "Quantity Decreased!",
+                                    "carts": 1,
+                                    "update": {
+                                        "1": {
+                                            "rowId": 1,
+                                            "item_id": "2",
+                                            "name_product": "TOMAT",
+                                            "qty": 1,
+                                            "price": "19,900.00",
+                                            "tax": "1,990.00",
+                                            "subtotal": "21,890.00"
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    },
+                    "400": {
+                        "description": "Bad Request",
+                        "content": {
+                            "application/json": {
+                                "example": {
+                                    "status": false,
+                                    "message": "Item Deleted."
+                                }
+                            }
+                        }
+                    },
+                    "404": {
+                        "description": "Not Found",
+                        "content": {
+                            "application/json": {
+                                "example": {
+                                    "status": false,
+                                    "message": "Item with rowId {rowId} not found in the cart"
+                                }
+                            }
+                        }
+                    },
+                    "422": {
+                        "description": "Validation Failed",
+                        "content": {
+                            "application/json": {
+                                "example": {
+                                    "status": false,
+                                    "message": "Validation not fulfilled!",
+                                    "errors": {
+                                        "email": [
+                                            "The email field is required."
+                                        ],
+                                        "rowId": [
+                                            "The rowId field must be an integer."
+                                        ]
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        }
+    }
+}

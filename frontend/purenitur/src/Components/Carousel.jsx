@@ -1,7 +1,9 @@
+import { useState, useEffect } from "react";
 import Slider from "react-slick";
 import Card from "./Card";
 import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
+import axios from "axios";
 
 const Carousel = () => {
   const settings = {
@@ -35,45 +37,35 @@ const Carousel = () => {
     ],
   };
 
+  const [products, setProducts] = useState([]);
+
+  const client = axios.create({
+    baseURL: "http://127.0.0.1:8000/api/catalog",
+  });
+
+  useEffect(() => {
+    client.get().then((response) => {
+      setProducts(response.data.products);
+    });
+  }, []);
+
   return (
     <div className="container mx-auto">
       <Slider {...settings}>
-        <div className="p-4">
-          <Card />
-        </div>
-        <div className="p-4">
-          <Card />
-        </div>
-        <div className="p-4">
-          <Card />
-        </div>
-        <div className="p-4">
-          <Card />
-        </div>
-        <div className="p-4">
-          <Card />
-        </div>
-        <div className="p-4">
-          <Card />
-        </div>
-        <div className="p-4">
-          <Card />
-        </div>
-        <div className="p-4">
-          <Card />
-        </div>
-        <div className="p-4">
-          <Card />
-        </div>
-        <div className="p-4">
-          <Card />
-        </div>
-        <div className="p-4">
-          <Card />
-        </div>
-        <div className="p-4">
-          <Card />
-        </div>
+        {products &&
+          products.map((product) => (
+            <div className="p-4">
+              <Card
+                name={product.name_product}
+                id={product.id}
+                category={product.category}
+                price={product.price}
+                image={product.image}
+                rating={product.rating}
+                sold={product.sold}
+              />
+            </div>
+          ))}
       </Slider>
     </div>
   );

@@ -1,0 +1,223 @@
+{
+    "openapi": "3.0.0",
+    "info": {
+        "title": "Update Product API",
+        "version": "1.0.0"
+    },
+    "paths": {
+        "/api/admin/products/update/{id}": {
+            "patch": {
+                "summary": "Update Product",
+                "description": "Endpoint to update product on product ID.",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "description": "ID of product",
+                        "required": true,
+                        "schema": {
+                            "type": "integer"
+                        }
+                    },
+                    {
+                        "name": "name_product",
+                        "in": "body",
+                        "description": "Name of product",
+                        "required": false,
+                        "schema": {
+                            "type": "string",
+                            "maximum": 255
+                        }
+                    },
+                    {
+                        "name": "category",
+                        "in": "body",
+                        "description": "Category of product",
+                        "required": false,
+                        "schema": {
+                            "type": "string",
+                            "maximum": 255
+                        }
+                    },
+                    {
+                        "name": "sku",
+                        "in": "body",
+                        "description": "SKU of product",
+                        "required": false,
+                        "schema": {
+                            "type": "string",
+                            "maximum": 12
+                        }
+                    },
+                    {
+                        "name": "price",
+                        "in": "body",
+                        "description": "Price of product",
+                        "required": false,
+                        "schema": {
+                            "type": "numeric",
+                            "maximum": 999999999.99
+                        }
+                    },
+                    {
+                        "name": "image",
+                        "in": "body",
+                        "description": "Image URL of product",
+                        "required": false,
+                        "schema": {
+                            "type": "string",
+                            "maximum": 255
+                        }
+                    },
+                    {
+                        "name": "rating",
+                        "in": "body",
+                        "description": "Rating of product",
+                        "required": false,
+                        "schema": {
+                            "type": "numeric",
+                            "maximum": 5.00
+                        }
+                    },
+                    {
+                        "name": "sold",
+                        "in": "body",
+                        "description": "Product sold count",
+                        "required": false,
+                        "schema": {
+                            "type": "integer"
+                        }
+                    },
+                    {
+                        "name": "feature_1",
+                        "in": "body",
+                        "description": "First feature of new product",
+                        "required": false,
+                        "schema": {
+                            "type": "string",
+                            "maximum": 255
+                        }
+                    },
+                    {
+                        "name": "feature_2",
+                        "in": "body",
+                        "description": "Second feature of new product",
+                        "required": false,
+                        "schema": {
+                            "type": "string",
+                            "maximum": 255
+                        }
+                    },
+                    {
+                        "name": "feature_3",
+                        "in": "body",
+                        "description": "Third feature of new product",
+                        "required": false,
+                        "schema": {
+                            "type": "string",
+                            "maximum": 255
+                        }
+                    },
+                    {
+                        "name": "feature_4",
+                        "in": "body",
+                        "description": "Fourth feature of new product",
+                        "required": false,
+                        "schema": {
+                            "type": "string",
+                            "maximum": 255
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Success",
+                        "content": {
+                            "application/json": {
+                                "example": {
+                                    "status": true,
+                                    "message": "Product Update successfully!",
+                                    "product": 1,
+                                    "product_detail": 1
+                                }
+                            }
+                        }
+                    },
+                    "404": {
+                        "description": "Product not Found",
+                        "content": {
+                            "application/json": {
+                                "example": {
+                                    "status": false,
+                                    "message": "Product not Found!"
+                                }
+                            }
+                        }
+                    },
+                    "422": {
+                        "description": "Validation not Fulfilled",
+                        "content": {
+                            "application/json": {
+                                "example": {
+                                    "status": false,
+                                    "message": "Validation not fulfilled!",
+                                    "errors": {
+                                        "id": [
+                                            "The id field is required.",
+                                            "The id field must be a integer."
+                                        ]
+                                    }
+                                },
+                                "example2": {
+                                    "status": false,
+                                    "message": "Validation not fulfilled!",
+                                    "errors": {
+                                        "name_product": [
+                                            "The name_product field must be a string.",
+                                            "The name_product field must not be greater than 255 characters."
+                                        ],
+                                        "category": [
+                                            "The category field must be a string.",
+                                            "The category field must not be greater than 255 characters."
+                                        ],
+                                        "price": [
+                                            "The price field must be a number.",
+                                            "The price may not be greater than 999999999.99."
+                                        ],
+                                        "image": [
+                                            "The image field must be a string.",
+                                            "The image field must not be greater than 255 characters."
+                                        ],
+                                        "rating": [
+                                            "The rating field must be a number.",
+                                            "The rating may not be greater than 5.00."
+                                        ],
+                                        "sold": [
+                                            "The sold field must be a integer."
+                                        ],
+                                        "feature_1": [
+                                            "The feature_1 field must be a string.",
+                                            "The feature_1 field must not be greater than 255 characters."
+                                        ],
+                                        "feature_2": [
+                                            "The feature_2 field must be a string.",
+                                            "The feature_2 field must not be greater than 255 characters."
+                                        ],
+                                        "feature_3": [
+                                            "The feature_3 field must be a string.",
+                                            "The feature_3 field must not be greater than 255 characters."
+                                        ],
+                                        "feature_4": [
+                                            "The feature_4 field must be a string.",
+                                            "The feature_4 field must not be greater than 255 characters."
+                                        ]
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        }
+    }
+}

@@ -1,0 +1,217 @@
+{
+    "openapi": "3.0.0",
+    "info": {
+        "title": "Create Product API",
+        "version": "1.0.0"
+    },
+    "paths": {
+        "/api/admin/products/create": {
+            "post": {
+                "summary": "Create Product",
+                "description": "Endpoint to create new product.",
+                "parameters": [
+                    {
+                        "name": "sku",
+                        "in": "body",
+                        "description": "SKU of new product",
+                        "required": true,
+                        "schema": {
+                            "type": "string",
+                            "maximum": 12
+                        }
+                    },
+                    {
+                        "name": "name_product",
+                        "in": "body",
+                        "description": "Name of new product",
+                        "required": true,
+                        "schema": {
+                            "type": "string",
+                            "maximum": 255
+                        }
+                    },
+                    {
+                        "name": "category",
+                        "in": "body",
+                        "description": "Category of new product",
+                        "required": true,
+                        "schema": {
+                            "type": "string",
+                            "maximum": 255
+                        }
+                    },
+                    {
+                        "name": "price",
+                        "in": "body",
+                        "description": "Price of new product",
+                        "required": true,
+                        "schema": {
+                            "type": "numeric",
+                            "maximum": 999999999.99
+                        }
+                    },
+                    {
+                        "name": "image",
+                        "in": "body",
+                        "description": "Image URL of new product",
+                        "required": true,
+                        "schema": {
+                            "type": "string",
+                            "maximum": 255
+                        }
+                    },
+                    {
+                        "name": "rating",
+                        "in": "body",
+                        "description": "Rating of new product",
+                        "required": true,
+                        "schema": {
+                            "type": "numeric",
+                            "maximum": 5.00
+                        }
+                    },
+                    {
+                        "name": "feature_1",
+                        "in": "body",
+                        "description": "First feature of new product",
+                        "required": false,
+                        "schema": {
+                            "type": "string",
+                            "maximum": 255
+                        }
+                    },
+                    {
+                        "name": "feature_2",
+                        "in": "body",
+                        "description": "Second feature of new product",
+                        "required": false,
+                        "schema": {
+                            "type": "string",
+                            "maximum": 255
+                        }
+                    },
+                    {
+                        "name": "feature_3",
+                        "in": "body",
+                        "description": "Third feature of new product",
+                        "required": false,
+                        "schema": {
+                            "type": "string",
+                            "maximum": 255
+                        }
+                    },
+                    {
+                        "name": "feature_4",
+                        "in": "body",
+                        "description": "Fourth feature of new product",
+                        "required": false,
+                        "schema": {
+                            "type": "string",
+                            "maximum": 255
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Success",
+                        "content": {
+                            "application/json": {
+                                "example": {
+                                    "status": true,
+                                    "message": "Product Created successfully!",
+                                    "product": {
+                                        "name_product": "TEST HIT API 7",
+                                        "category": "Alat Dapur",
+                                        "sku": "PRNTNRALD128",
+                                        "price": "50000.00",
+                                        "image": "https://d2xjmi1k71iy2m.cloudfront.net/dairyfarm/id/images/797/0779769_PE759665_S4.jpg",
+                                        "rating": "3.7",
+                                        "sold": 0,
+                                        "updated_at": "2023-11-10T09:41:25.000000Z",
+                                        "created_at": "2023-11-10T09:41:25.000000Z",
+                                        "id": 120
+                                    },
+                                    "product_detail": {
+                                        "name_product": "TEST HIT API 7",
+                                        "sku": "PRNTNRALD128",
+                                        "feature_1": "feature_1",
+                                        "feature_2": "feature_2",
+                                        "feature_3": "feature_3",
+                                        "feature_4": "feature_4",
+                                        "updated_at": "2023-11-10T09:41:25.000000Z",
+                                        "created_at": "2023-11-10T09:41:25.000000Z",
+                                        "id": 120
+                                    }
+                                }
+                            }
+                        }
+                    },
+                    "422": {
+                        "description": "Validation not Fulfilled or Product (SKU) Already Exists!",
+                        "content": {
+                            "application/json": {
+                                "example": {
+                                    "status": false,
+                                    "message": "Validation not fulfilled!",
+                                    "errors": {
+                                        "sku": [
+                                            "The sku field is required.",
+                                            "The sku field must be a string.",
+                                            "The sku field must not be greater than 12 characters."
+                                        ]
+                                    }
+                                },
+                                "example2": {
+                                    "status": false,
+                                    "message": "Validation not fulfilled!",
+                                    "errors": {
+                                        "name_product": [
+                                            "The name_product field must be a string.",
+                                            "The name_product field must not be greater than 255 characters."
+                                        ],
+                                        "category": [
+                                            "The category field must be a string.",
+                                            "The category field must not be greater than 255 characters."
+                                        ],
+                                        "price": [
+                                            "The price field must be a number.",
+                                            "The price may not be greater than 999999999.99."
+                                        ],
+                                        "image": [
+                                            "The image field must be a string.",
+                                            "The image field must not be greater than 255 characters."
+                                        ],
+                                        "rating": [
+                                            "The rating field must be a number.",
+                                            "The rating may not be greater than 5.00."
+                                        ],
+                                        "feature_1": [
+                                            "The feature_1 field must be a string.",
+                                            "The feature_1 field must not be greater than 255 characters."
+                                        ],
+                                        "feature_2": [
+                                            "The feature_2 field must be a string.",
+                                            "The feature_2 field must not be greater than 255 characters."
+                                        ],
+                                        "feature_3": [
+                                            "The feature_3 field must be a string.",
+                                            "The feature_3 field must not be greater than 255 characters."
+                                        ],
+                                        "feature_4": [
+                                            "The feature_4 field must be a string.",
+                                            "The feature_4 field must not be greater than 255 characters."
+                                        ]
+                                    }
+                                },
+                                "example3": {
+                                    "status": false,
+                                    "message": "Product (SKU) already exists!"
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        }
+    }
+}

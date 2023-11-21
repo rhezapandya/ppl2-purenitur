@@ -1,0 +1,168 @@
+{
+    "openapi": "3.0.0",
+    "info": {
+        "title": "Update User API",
+        "version": "1.0.0"
+    },
+    "paths": {
+        "/api/users/{id}": {
+            "patch": {
+                "summary": "Update User",
+                "description": "Endpoint to update user by user ID.",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "body",
+                        "description": "ID of user",
+                        "required": true,
+                        "schema": {
+                            "type": "integer"
+                        }
+                    },
+                    {
+                        "name": "password",
+                        "in": "body",
+                        "description": "Password of user account",
+                        "required": true,
+                        "schema": {
+                            "minimum": 8
+                        }
+                    },
+                    {
+                        "name": "password_confirmation",
+                        "in": "body",
+                        "description": "Password of user account",
+                        "required": true,
+                        "schema": {
+                            "same": "password"
+                        }
+                    },
+                    {
+                        "name": "first_name",
+                        "in": "body",
+                        "description": "First name of user",
+                        "required": true,
+                        "schema": {
+                            "type": "string"
+                        }
+                    },
+                    {
+                        "name": "last_name",
+                        "in": "body",
+                        "description": "Last name of user",
+                        "required": true,
+                        "schema": {
+                            "type": "string"
+                        }
+                    },
+                    {
+                        "name": "gender",
+                        "in": "body",
+                        "description": "Gender of user",
+                        "required": true,
+                        "schema": {
+                            "type": "string",
+                            "maximum": 1
+                        }
+                    },
+                    {
+                        "name": "address",
+                        "in": "body",
+                        "description": "Address of user",
+                        "required": true,
+                        "schema": {
+                            "type": "string"
+                        }
+                    },
+                    {
+                        "name": "telephone",
+                        "in": "body",
+                        "description": "Telephone number of user",
+                        "required": true,
+                        "schema": {
+                            "type": "string",
+                            "maximum": 14
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Success",
+                        "content": {
+                            "application/json": {
+                                "example": {
+                                    "status": true,
+                                    "message": "User Update successfully!",
+                                    "users": 1
+                                }
+                            }
+                        }
+                    },
+                    "404": {
+                        "description": "User not Found",
+                        "content": {
+                            "application/json": {
+                                "example": {
+                                    "status": false,
+                                    "message": "User not Found!"
+                                }
+                            }
+                        }
+                    },
+                    "422": {
+                        "description": "Validation not fulfilled",
+                        "content": {
+                            "application/json": {
+                                "example-1": {
+                                    "status": false,
+                                    "message": "Validation not fulfilled!",
+                                    "errors": {
+                                        "id": [
+                                            "The id field is required.",
+                                            "The id field must be a integer."
+                                        ]
+                                    }
+                                },
+                                "example-2": {
+                                    "status": false,
+                                    "message": "Validation not fulfilled!",
+                                    "errors": {
+                                        "password": [
+                                            "The password field is required.",
+                                            "The password field must be greater than 8 characters."
+                                        ],
+                                        "password_confirmation": [
+                                            "The password_confirmation field is required."
+                                        ],
+                                        "first_name": [
+                                            "The first_name field is required.",
+                                            "The first_name field must be a string."
+                                        ],
+                                        "last_name": [
+                                            "The last_name field is required.",
+                                            "The last_name field must be a string."
+                                        ],
+                                        "gender": [
+                                            "The gender field is required.",
+                                            "The gender field must be a string.",
+                                            "The gender field must not be greater than 1 characters."
+                                        ],
+                                        "address": [
+                                            "The address field is required.",
+                                            "The address field must be a string."
+                                        ],
+                                        "telephone": [
+                                            "The telephone field is required.",
+                                            "The telephone field must be a string.",
+                                            "The telephone field must not be greater than 14 characters."
+                                        ]
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        }
+    }
+}
