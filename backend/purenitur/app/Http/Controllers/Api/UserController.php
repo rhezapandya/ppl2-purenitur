@@ -11,7 +11,7 @@ use Illuminate\Support\Facades\Validator;
 class UserController extends Controller
 {
     /**
-     * Test Login
+     * User Login
      */
     public function login(Request $request)
     {
@@ -33,7 +33,83 @@ class UserController extends Controller
     }
 
     /**
-     * Test Logout
+     * User Register
+     */
+    public function register(Request $request)
+    {
+        $check_validation_email_username = Validator::make($request->all(), [
+            'email' => 'required|email:rfc,dns|unique:users,email',
+            'username' => 'required|unique:users,username|min:4|max:16',
+        ]);
+
+        if ($check_validation_email_username->fails()) {
+            return response()->json([
+                'status' => false,
+                'message' => 'Validation not fulfilled!',
+                'errors' => $check_validation_email_username->errors(),
+            ], 422);
+        } else {
+            $check_email = User::where('email', $request->email)->first();
+            $check_username = User::where('username', $request->username)->first();
+
+            if ($check_email) {
+                return response()->json([
+                    'status' => false,
+                    'message' => "Duplicate Email!",
+                ], 409);
+            } else {
+                if ($check_username) {
+                    return response()->json([
+                        'status' => false,
+                        'message' => "Duplicate Username!",
+                    ], 409);
+                } else {
+                    $check_validation = Validator::make($request->all(), [
+                        'password' => 'required|min:8',
+                        'password_confirmation' => 'required|same:password',
+                        'first_name' => ['required', 'string'],
+                        'last_name' => ['required', 'string'],
+                        'gender' => ['required', 'string', 'max:1'],
+                        'address' => ['required', 'string'],
+                        'telephone' => ['required', 'string', 'max:14']
+                    ]);
+
+                    if ($check_validation->fails()) {
+                        return response()->json([
+                            'status' => false,
+                            'message' => 'Validation not fulfilled!',
+                            'errors' => $check_validation->errors(),
+                        ], 422);
+                    } else {
+                        $user = User::create([
+                            'email' => $request->email,
+                            'username' => $request->username,
+                            'password' => Hash::make($request->password),
+                            'first_name' => $request->first_name,
+                            'last_name' => $request->last_name,
+                            'gender' => $request->gender,
+                            'address' => $request->address,
+                            'telephone' =>  $request->telephone,
+                        ]);
+
+                        $user_login = User::where('email', $request->email)->first();
+
+                        $token = $user->createToken('my-app-token')->plainTextToken;
+
+                        return response()->json([
+                            'status' => true,
+                            'message' => "User Created successfully!",
+                            'user' => $user_login,
+                            'token' => $token
+                        ], 200);
+                    }
+                }
+            }
+        }
+    }
+
+    /**
+     * User Logout
      */
     public function logout(Request $request)
     {
