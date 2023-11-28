@@ -5,6 +5,8 @@ namespace App\Http\Controllers\Api;
 use App\Http\Controllers\Controller;
 use App\Models\User;
 use App\Models\ShoppingCart;
+use App\Models\Product;
+use App\Models\ProductDetail;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Log;
@@ -42,13 +44,37 @@ class CartController extends Controller
                 } else {
                     $cartData = json_decode($carts->cart, true);
 
-                    return response()->json([
-                        'status' => true,
-                        'message' => $carts->username_user . "'s Shopping Cart",
-                        'carts' => $cartData,
-                        'user-login' => $user_login,
-                        'token' => $accessToken
-                    ], 200);
+                    if ($cartData === []) {
+                        return response()->json([
+                            'status' => true,
+                            'message' => $carts->username_user . "'s Shopping Cart",
+                            'carts' => $cartData,
+                            'user-login' => $user_login,
+                            'token' => $accessToken
+                        ], 200);
+                    } else {
+                        foreach ($cartData as &$cartItem) {
+                            $product = Product::find($cartItem['item_id']);
+                            $product_detail = ProductDetail::find($cartItem['item_id']);
+
+                            if ($product) {
+                                $cartItem['image'] = $product->image;
+                                $cartItem['category'] = $product->category;
+                                $cartItem['feature_1'] = $product_detail->feature_1;
+                                $cartItem['feature_2'] = $product_detail->feature_2;
+                                $cartItem['feature_3'] = $product_detail->feature_3;
+                                $cartItem['feature_4'] = $product_detail->feature_4;
+                            }
+                        }
+
+                        return response()->json([
+                            'status' => true,
+                            'message' => $carts->username_user . "'s Shopping Cart",
+                            'carts' => $cartData,
+                            'user-login' => $user_login,
+                            'token' => $accessToken
+                        ], 200);
+                    }
                 }
             }
         } else {

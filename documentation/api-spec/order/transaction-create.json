@@ -11,6 +11,15 @@
                 "description": "Endpoint to create a transaction on user's checkout by order ID.",
                 "parameters": [
                     {
+                        "name": "user_login",
+                        "in": "Authorization",
+                        "description": "Token of user login",
+                        "required": true,
+                        "schema": {
+                            "type": "string"
+                        }
+                    },
+                    {
                         "name": "order_id",
                         "in": "form-data",
                         "description": "ID of order",
@@ -70,6 +79,22 @@
                                         ],
                                         "image_payment": [
                                             "The image payment field must be a file of type: jpeg, jpg, png, jfif, pdf."
+                                        ]
+                                    }
+                                }
+                            }
+                        }
+                    },
+                    "401": {
+                        "description": "User not logged in",
+                        "content": {
+                            "application/json": {
+                                "example": {
+                                    "status": false,
+                                    "message": "User not logged in",
+                                    "errors": {
+                                        "reroute": [
+                                            "Reroute to login page."
                                         ]
                                     }
                                 }

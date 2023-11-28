@@ -1,0 +1,49 @@
+{
+    "openapi": "3.0.0",
+    "info": {
+        "title": "Logout API",
+        "version": "1.0.0"
+    },
+    "paths": {
+        "/api/logout": {
+            "get": {
+                "summary": "Logout",
+                "description": "Endpoint to Get Logged Out from Logged In Account Profile.",
+                "parameters": [
+                    {
+                        "name": "user_login",
+                        "in": "Authorization",
+                        "description": "Token of user login",
+                        "required": true
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Success",
+                        "content": {
+                            "application/json": {
+                                "example": {
+                                    "status": true,
+                                    "message": "User Successfully Logged Out"
+                                }
+                            }
+                        }
+                    },
+                    "401": {
+                        "description": "User not login!",
+                        "content": {
+                            "application/json": {
+                                "example": {
+                                    "status": false,
+                                    "message": [
+                                        "User not login yet."
+                                    ]
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        }
+    }
+}

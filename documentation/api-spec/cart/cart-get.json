@@ -11,6 +11,15 @@
                 "description": "Endpoint to retrieve the contents of a user's shopping cart.",
                 "parameters": [
                     {
+                        "name": "user_login",
+                        "in": "Authorization",
+                        "description": "Token of user login",
+                        "required": true,
+                        "schema": {
+                            "type": "string"
+                        }
+                    },
+                    {
                         "name": "email",
                         "in": "body",
                         "description": "Email of the user",
@@ -26,7 +35,27 @@
                         "description": "Success",
                         "content": {
                             "application/json": {
-                                "example": {
+                                "example1": {
+                                    "status": true,
+                                    "message": "rhezapandya's Shopping Cart",
+                                    "carts": [],
+                                    "user-login": {
+                                        "id": 4,
+                                        "email": "rhezapandyaa@gmail.com",
+                                        "username": "rhezapandya",
+                                        "first_name": "Rheza",
+                                        "last_name": "Pandya",
+                                        "gender": "M",
+                                        "address": "Jatinangor",
+                                        "telephone": "082100000000",
+                                        "is_admin": "1",
+                                        "email_verified_at": null,
+                                        "created_at": "2023-11-21T18:58:22.000000Z",
+                                        "updated_at": "2023-11-21T18:58:22.000000Z"
+                                    },
+                                    "token": "683a088fc089187062021938afb62a9d632933dbb6b25e20d835fb5524a0c76c"
+                                },
+                                "example2": {
                                     "status": true,
                                     "message": "rhezapandya's Shopping Cart",
                                     "carts": {
@@ -37,9 +66,45 @@
                                             "qty": 1,
                                             "price": "19,900.00",
                                             "tax": "1,990.00",
-                                            "subtotal": "21,890.00"
+                                            "subtotal": "21,890.00",
+                                            "image": "https://d2xjmi1k71iy2m.cloudfront.net/dairyfarm/id/images/477/1147771_PE883455_S4.jpg",
+                                            "category": "Alat Dapur",
+                                            "feature_1": "Botol semprot",
+                                            "feature_2": " hijau muda",
+                                            "feature_3": " 35 cl",
+                                            "feature_4": ""
+                                        },
+                                        "2": {
+                                            "rowId": 2,
+                                            "item_id": "1",
+                                            "name_product": "GRILLTIDER",
+                                            "qty": 1,
+                                            "price": "59,900.00",
+                                            "tax": "5,990.00",
+                                            "subtotal": "65,890.00",
+                                            "image": "https://d2xjmi1k71iy2m.cloudfront.net/dairyfarm/id/images/159/0815911_PE773102_S4.jpg",
+                                            "category": "Alat Dapur",
+                                            "feature_1": "Tusuk sate",
+                                            "feature_2": " baja tahan karat",
+                                            "feature_3": " 30 cm",
+                                            "feature_4": ""
                                         }
-                                    }
+                                    },
+                                    "user-login": {
+                                        "id": 4,
+                                        "email": "rhezapandyaa@gmail.com",
+                                        "username": "rhezapandya",
+                                        "first_name": "Rheza",
+                                        "last_name": "Pandya",
+                                        "gender": "M",
+                                        "address": "Jatinangor",
+                                        "telephone": "082100000000",
+                                        "is_admin": "1",
+                                        "email_verified_at": null,
+                                        "created_at": "2023-11-21T18:58:22.000000Z",
+                                        "updated_at": "2023-11-21T18:58:22.000000Z"
+                                    },
+                                    "token": "683a088fc089187062021938afb62a9d632933dbb6b25e20d835fb5524a0c76c"
                                 }
                             }
                         }
@@ -54,6 +119,22 @@
                                     "errors": {
                                         "email": [
                                             "The email field is required."
+                                        ]
+                                    }
+                                }
+                            }
+                        }
+                    },
+                    "401": {
+                        "description": "User not logged in",
+                        "content": {
+                            "application/json": {
+                                "example": {
+                                    "status": false,
+                                    "message": "User not logged in",
+                                    "errors": {
+                                        "reroute": [
+                                            "Reroute to login page."
                                         ]
                                     }
                                 }

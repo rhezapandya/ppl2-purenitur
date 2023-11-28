@@ -1,28 +1,19 @@
 {
     "openapi": "3.0.0",
     "info": {
-        "title": "Create New User API",
+        "title": "Register Account API",
         "version": "1.0.0"
     },
     "paths": {
-        "/api/users": {
+        "/api/register": {
             "post": {
-                "summary": "Create New User",
-                "description": "Endpoint to create new user by admin.",
+                "summary": "Register Account",
+                "description": "Endpoint to register new user.",
                 "parameters": [
-                    {
-                        "name": "user_login",
-                        "in": "Authorization",
-                        "description": "Token of user login",
-                        "required": true,
-                        "schema": {
-                            "type": "string"
-                        }
-                    },
                     {
                         "name": "email",
                         "in": "body",
-                        "description": "Email of user",
+                        "description": "Email of new user",
                         "required": true,
                         "unique": "users",
                         "schema": {
@@ -117,17 +108,20 @@
                                     "status": true,
                                     "message": "User Created successfully!",
                                     "user": {
+                                        "id": 5,
                                         "email": "rhezapandya20@gmail.com",
-                                        "username": "rhezapans",
+                                        "username": "rhezapandya20",
                                         "first_name": "Rhe",
                                         "last_name": "Pans",
                                         "gender": "M",
                                         "address": "Jatinangor",
                                         "telephone": "082100000000",
-                                        "updated_at": "2023-11-10T11:22:09.000000Z",
-                                        "created_at": "2023-11-10T11:22:09.000000Z",
-                                        "id": 5
-                                    }
+                                        "is_admin": "0",
+                                        "email_verified_at": null,
+                                        "created_at": "2023-11-22T08:09:35.000000Z",
+                                        "updated_at": "2023-11-22T08:09:35.000000Z"
+                                    },
+                                    "token": "2|KVdnjWBoucYFYlS1JDzrXlTd4f4QkWSNNXBttEVJ0ebee533"
                                 }
                             }
                         }
