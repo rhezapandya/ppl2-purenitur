@@ -31,6 +31,7 @@ Route::post("register", [UserController::class, 'register']);
 Route::post("logout", [UserController::class, 'logout'])->middleware('auth:sanctum');
 Route::get("profile", [UserController::class, 'profile'])->middleware('auth:sanctum');
 Route::post("profile-update", [UserController::class, 'profile_update'])->middleware('auth:sanctum');
+Route::post("password-update", [UserController::class, 'password_update'])->middleware('auth:sanctum');
 
 // API For Catalog & Product View (User)
 Route::get('/catalog', [CatalogController::class, 'index']);

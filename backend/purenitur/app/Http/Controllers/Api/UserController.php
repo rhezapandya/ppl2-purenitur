@@ -160,8 +160,6 @@ class UserController extends Controller
 
             if ($check_avail) {
                 $check_validation = Validator::make($request->all(), [
-                    'password' => 'required|min:8',
-                    'password_confirmation' => 'required|same:password',
                     'first_name' => ['required', 'string'],
                     'last_name' => ['required', 'string'],
                     'gender' => ['required', 'string', 'max:1'],
@@ -178,7 +176,6 @@ class UserController extends Controller
                 } else {
                     $users = User::where('id', $user_login->id)
                         ->update([
-                            'password' => Hash::make($request->password),
                             'first_name' => $request->first_name,
                             'last_name' => $request->last_name,
                             'gender' => $request->gender,
@@ -205,6 +202,53 @@ class UserController extends Controller
             ], 401);
         }
     }
+
+    public function password_update(Request $request)
+    {
+        $user_login = $request->user();
+        if ($user_login && $user_login->currentAccessToken()) {
+            $accessToken = $user_login->currentAccessToken()->token;
+
+            $check_avail = User::find($user_login->id);
+
+            if ($check_avail) {
+                $check_validation = Validator::make($request->all(), [
+                    'password' => 'required|min:8',
+                    'password_confirmation' => 'required|same:password',
+                ]);
+
+                if ($check_validation->fails()) {
+                    return response()->json([
+                        'status' => false,
+                        'message' => 'Validation not fulfilled!',
+                        'errors' => $check_validation->errors(),
+                    ], 422);
+                } else {
+                    $users = User::where('id', $user_login->id)
+                        ->update([
+                            'password' => Hash::make($request->password),
+                        ]);
+
+                    return response()->json([
+                        'status' => true,
+                        'message' => "Password Update successfully!",
+                        'users' => $users
+                    ], 200);
+                }
+            } else {
+                return response()->json([
+                    'status' => false,
+                    'message' => "User not Found!",
+                ], 404);
+            }
+        } else {
+            return response()->json([
+                'status' => false,
+                'message' => 'User not logged in',
+            ], 401);
+        }
+    }
+
 
     /**
      * Display a listing of the resource.
