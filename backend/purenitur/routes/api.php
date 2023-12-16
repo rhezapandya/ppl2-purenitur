@@ -54,6 +54,9 @@ Route::middleware('auth:sanctum')->group(function () {
     Route::post('/checkout/shipment/create', [ShipmentController::class, 'create_shipment']);
     Route::post('/checkout/shipment/update', [ShipmentController::class, 'update_shipment']);
 
+    // API For Order CRUD (Admin)
+    Route::get('/admin/orders', [OrderController::class, 'get_all_order']);
+
     // API For Products CRUD (Admin)
     Route::get('/admin/products', [ProductController::class, 'show']);
     Route::post('/admin/products/create', [ProductController::class, 'store']);

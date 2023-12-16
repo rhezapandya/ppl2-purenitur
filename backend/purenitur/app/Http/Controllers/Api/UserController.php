@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Api;
 
 use App\Models\User;
 use App\Http\Controllers\Controller;
+use App\Models\ShoppingCart;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Validator;
@@ -90,6 +91,11 @@ class UserController extends Controller
                             'gender' => $request->gender,
                             'address' => $request->address,
                             'telephone' =>  $request->telephone,
+                        ]);
+                        $cart = ShoppingCart::create([
+                            'email_user' => $request->email,
+                            'username_user' => $request->username,
+                            'cart' => "[]",
                         ]);
 
                         $user_login = User::where('email', $request->email)->first();
@@ -501,6 +507,8 @@ class UserController extends Controller
 
                     if ($check_avail) {
                         $users = User::where('id', $request->id)
+                            ->delete();
+                        $carts = ShoppingCart::where('id', $request->id)
                             ->delete();
 
                         return response()->json([
