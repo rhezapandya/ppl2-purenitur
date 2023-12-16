@@ -40,12 +40,22 @@ const Carousel = () => {
   const [products, setProducts] = useState([]);
 
   const client = axios.create({
-    baseURL: "http://127.0.0.1:8000/api/catalog",
+    baseURL: "https://api.pureniture.shop/api/catalog",
   });
 
   useEffect(() => {
     client.get().then((response) => {
-      setProducts(response.data.products);
+      // Get all products from the API response
+      const allProducts = response.data.products;
+
+      // Shuffle the products randomly
+      const shuffledProducts = allProducts.sort(() => 0.5 - Math.random());
+
+      // Get the first 15 products (or fewer if the API returns less than 15)
+      const selectedProducts = shuffledProducts.slice(0, 15);
+
+      // Set the selected products in state
+      setProducts(selectedProducts);
     });
   }, []);
 
@@ -54,7 +64,7 @@ const Carousel = () => {
       <Slider {...settings}>
         {products &&
           products.map((product) => (
-            <div className="p-4">
+            <div className="p-4" key={product.id}>
               <Card
                 name={product.name_product}
                 id={product.id}

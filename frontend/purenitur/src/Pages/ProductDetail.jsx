@@ -1,6 +1,6 @@
 import React from "react";
 import Navbar from "../Components/Navbar";
-import { useParams } from "react-router-dom";
+import { useParams, useNavigate } from "react-router-dom";
 import { useState, useEffect } from "react";
 import axios from "axios";
 import Card from "../Components/Card";
@@ -11,6 +11,9 @@ function ProductDetail() {
   const [productDetails, setProductDetails] = useState(null);
   const [loading, setLoading] = useState(true);
   const [selectedProduct, setSelectedProduct] = useState([]);
+  const [userEmail, setUserEmail] = useState(null);
+  const token = localStorage.getItem("token");
+  const navigate = useNavigate();
 
   useEffect(() => {
     const response = axios
@@ -25,6 +28,64 @@ function ProductDetail() {
         setLoading(false);
       });
   }, [name]);
+
+  useEffect(() => {
+    // Fetch user profile using token from localStorage
+    if (token) {
+      axios
+        .get("http://127.0.0.1:8000/api/profile", {
+          headers: {
+            Authorization: `Bearer ${token}`,
+          },
+        })
+        .then((response) => {
+          console.log(response);
+          setUserEmail(response.data.users.email);
+        })
+        .catch((error) => {
+          console.error("Error fetching user profile:", error);
+          // Handle error fetching user profile here
+        });
+    }
+  }, []);
+
+  const handleAddToCart = async (event) => {
+    event.preventDefault();
+    try {
+      if (!userEmail) {
+        // Handle case where user email is not available
+        console.error("User email not found.");
+        navigate("/login");
+        return;
+      }
+
+      const payload = {
+        email: userEmail,
+        item_id: selectedProduct.id,
+        name_product: selectedProduct.name_product,
+        price: selectedProduct.price,
+      };
+
+      const response = await axios.post(
+        "http://127.0.0.1:8000/api/cart/add",
+        payload,
+        {
+          headers: {
+            Authorization: `Bearer ${token}`,
+          },
+        }
+      );
+
+      // Handle success response
+      console.log("Product added to cart:", response.data);
+      navigate("/cart");
+      // You might want to update UI or show a success message here
+    } catch (error) {
+      // Handle error response
+      console.error("Error adding product to cart:", error);
+      // You can display an error message or handle errors accordingly
+    }
+  };
 
   return (
     <div className="min-h-screen">
@@ -46,7 +107,7 @@ function ProductDetail() {
                 >
                   <path d="M10.707 2.293a1 1 0 00-1.414 0l-7 7a1 1 0 001.414 1.414L4 10.414V17a1 1 0 001 1h2a1 1 0 001-1v-2a1 1 0 011-1h2a1 1 0 011 1v2a1 1 0 001 1h2a1 1 0 001-1v-6.586l.293.293a1 1 0 001.414-1.414l-7-7z"></path>
                 </svg>
-                Home
+                <span className="text-sm font-medium text-gray-500">Home</span>
               </a>
             </li>
             <li>
@@ -139,7 +200,7 @@ function ProductDetail() {
                   </div>
                 </div>
                 <div class="w-full flex items-stretch">
-                  <form id="submits" action="/carts" method="GET" class="">
+                  <form onSubmit={(event) => handleAddToCart(event)}>
                     <button
                       type="submit"
                       class="w-44 md:w-[200px] bg-white rounded-lg p-3 text-primary-one font-semibold border-2 border-primary-one mr-1"

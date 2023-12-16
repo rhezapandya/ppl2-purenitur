@@ -18,21 +18,21 @@ function Navbar() {
         </Link>
         <div className="flex md:order-2">
           <Link
-            to="/login"
+            to="/cart"
             className="inline-flex items-center px-2"
             aria-current="page"
           >
             <MdOutlineShoppingCart size="20px" />
           </Link>
           <Link
-            to="/login"
+            to="/shipment"
             className="inline-flex items-center px-2"
             aria-current="page"
           >
             <FaTruck size="20px" />
           </Link>
           <Link
-            to="/login"
+            to="/editprofile"
             className="inline-flex items-center px-2"
             aria-current="page"
           >
