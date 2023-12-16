@@ -1,0 +1,111 @@
+{
+    "openapi": "3.0.0",
+    "info": {
+        "title": "Show All Orders Admin API",
+        "version": "1.0.0"
+    },
+    "paths": {
+        "/api/admin/orders": {
+            "get": {
+                "summary": "Show All Orders",
+                "description": "Endpoint to retrieve all orders data.",
+                "parameters": [
+                    {
+                        "name": "user_login",
+                        "in": "Authorization",
+                        "description": "Token of user login",
+                        "required": true,
+                        "schema": {
+                            "type": "string"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Success",
+                        "content": {
+                            "application/json": {
+                                "example": {
+                                    "status": true,
+                                    "message": "Show All Order!",
+                                    "products": [
+                                        {
+                                            "id": 1,
+                                            "user_id": 5,
+                                            "cart": "{\"1\":{\"rowId\":1,\"item_id\":\"1\",\"name_product\":\"GRILLTIDER\",\"qty\":2,\"price\":\"119,800.00\",\"tax\":\"11,980.00\",\"subtotal\":\"131,780.00\"}}",
+                                            "price_total": "131780.00",
+                                            "discount_id": null,
+                                            "final_price": "131780.00",
+                                            "transaction_id": 1,
+                                            "payment_type": "Bank Transfer BCA",
+                                            "status_payment": "WAITING FOR CONFIRMATION",
+                                            "image_payment": "img_payment/HTyKSkufewpo6qgu7pcmCGlrGGONIV2Ehy69Rvio.jpg",
+                                            "shipment_id": null,
+                                            "shipment_status": null,
+                                            "shipment_address": "Jatinangor",
+                                            "created_at": "2023-12-16T07:43:08.000000Z",
+                                            "updated_at": "2023-12-16T14:43:18.000000Z"
+                                        },
+                                        {
+                                            "id": 2,
+                                            "user_id": 4,
+                                            "cart": "{\"1\":{\"rowId\":1,\"item_id\":\"1\",\"name_product\":\"GRILLTIDER\",\"qty\":3,\"price\":\"179,700.00\",\"tax\":\"17,970.00\",\"subtotal\":\"197,670.00\"}}",
+                                            "price_total": "197670.00",
+                                            "discount_id": null,
+                                            "final_price": "197670.00",
+                                            "transaction_id": 2,
+                                            "payment_type": "Bank Transfer BCA",
+                                            "status_payment": "CONFIRMED",
+                                            "image_payment": "img_payment/Npidz0tZsrRj9jnoIs3QmPxGD92w8JzXJGffnO5P.jpg",
+                                            "shipment_id": null,
+                                            "shipment_status": null,
+                                            "shipment_address": "Jatinangor",
+                                            "created_at": "2023-12-16T07:44:30.000000Z",
+                                            "updated_at": "2023-12-16T07:44:44.000000Z"
+                                        }
+                                    ]
+                                }
+                            }
+                        }
+                    },
+                    "422": {
+                        "description": "Order not found!",
+                        "content": {
+                            "application/json": {
+                                "example": {
+                                    "status": false,
+                                    "message": "Order not found!"
+                                }
+                            }
+                        }
+                    },
+                    "401": {
+                        "description": "User not logged in or user not admin",
+                        "content": {
+                            "application/json": {
+                                "example": {
+                                    "status": false,
+                                    "message": "User not logged in",
+                                    "errors": {
+                                        "reroute": [
+                                            "Reroute to login page."
+                                        ]
+                                    }
+                                },
+                                "example2": {
+                                    "status": false,
+                                    "message": "User not admin",
+                                    "errors": {
+                                        "reroute": [
+                                            "Reroute to dashboard."
+                                        ]
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        }
+    }
+}

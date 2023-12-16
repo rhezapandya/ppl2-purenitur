@@ -15,6 +15,42 @@ use Illuminate\Support\Facades\Storage;
 
 class OrderController extends Controller
 {
+    public function get_all_order(Request $request)
+    {
+        $user_login = $request->user();
+        if ($user_login && $user_login->currentAccessToken()) {
+            $accessToken = $user_login->currentAccessToken()->token;
+
+            if ($user_login->is_admin === '1') {
+                $order = Order::select('*')
+                    ->get();
+
+                if ($order) {
+                    return response()->json([
+                        'status' => true,
+                        'message' => "Show All Order!",
+                        'order' => $order
+                    ], 200);
+                } else {
+                    return response()->json([
+                        'status' => false,
+                        'message' => 'Order not found!',
+                    ], 422);
+                }
+            } else {
+                return response()->json([
+                    'status' => false,
+                    'message' => 'User not admin',
+                ], 401);
+            }
+        } else {
+            return response()->json([
+                'status' => false,
+                'message' => 'User not logged in',
+            ], 401);
+        }
+    }
+
     /**
      * Display a listing of the resource.
      */
