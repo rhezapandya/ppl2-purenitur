@@ -7,6 +7,7 @@ import Footer from "../Components/Footer";
 function Admin() {
   const token = localStorage.getItem("token");
   const [userData, setUserData] = useState(null);
+  const [order, setOrder] = useState(null);
   const navigate = useNavigate();
 
   useEffect(() => {
@@ -30,13 +31,75 @@ function Admin() {
     }
   }, [token]);
 
-  console.log(userData);
-
   useEffect(() => {
     if (userData && userData.is_admin === 0) {
       navigate("/");
     }
   }, [userData, navigate]);
+
+  useEffect(() => {
+    axios
+      .get("http://127.0.0.1:8000/api/admin/orders", {
+        headers: {
+          Authorization: `Bearer ${token}`,
+        },
+      })
+      .then((response) => {
+        setOrder(response.data.order);
+      })
+      .catch((error) => {
+        console.error("Error fetching order:", error);
+        // Handle error fetching user profile here
+      });
+  }, []);
+
+  const handleConfirm = (orderId) => {
+    axios
+      .post(
+        "http://127.0.0.1:8000/api/checkout/payment/confirm",
+        { order_id: orderId, status_payment: "CONFIRMED" },
+        {
+          headers: {
+            Authorization: `Bearer ${token}`,
+          },
+        }
+      )
+      .then(() => {
+        setOrder((prevOrders) =>
+          prevOrders.map((ord) =>
+            ord.id === orderId ? { ...ord, status_payment: "CONFIRMED" } : ord
+          )
+        );
+      })
+      .catch((error) => {
+        console.error("Error confirming payment:", error);
+        // Handle error confirming payment
+      });
+  };
+
+  const handleDecline = (orderId) => {
+    axios
+      .post(
+        "http://127.0.0.1:8000/api/checkout/payment/failure",
+        { order_id: orderId, status_payment: "FAILED" },
+        {
+          headers: {
+            Authorization: `Bearer ${token}`,
+          },
+        }
+      )
+      .then(() => {
+        setOrder((prevOrders) =>
+          prevOrders.map((ord) =>
+            ord.id === orderId ? { ...ord, status_payment: "FAILED" } : ord
+          )
+        );
+      })
+      .catch((error) => {
+        console.error("Error declining payment:", error);
+        // Handle error declining payment
+      });
+  };
 
   return (
     <div className="min-h-screen">
@@ -86,8 +149,63 @@ function Admin() {
             </li>
           </ol>
         </div>
+        <div className="mx-20">
+          <table className="w-full text-sm text-left rtl:text-right text-gray-500">
+            <thead className="text-sm text-gray-700 uppercase bg-gray-50 text-center">
+              <tr>
+                <th className="px-6 py-3">ID</th>
+                <th className="px-6 py-3">User ID</th>
+                <th className="px-6 py-3">Total Price</th>
+                <th className="px-6 py-3">Discount</th>
+                <th className="px-6 py-3">Final Price</th>
+                <th className="px-6 py-3">Transaction ID</th>
+                <th className="px-6 py-3">Payment Type</th>
+                <th className="px-6 py-3">Image</th>
+                <th className="px-6 py-3">Payment Status</th>
+                <th className="px-6 py-3">Address</th>
+                <th className="px-6 py-3">Action</th>
+              </tr>
+            </thead>
+            <tbody>
+              {order &&
+                order.map((ord, index) => (
+                  <tr key={ord.id} className="bg-white border-b text-center">
+                    <td className="px-6 py-4">{ord.id}</td>
+                    <td className="px-6 py-4">{ord.user_id}</td>
+                    <td className="px-6 py-4">{ord.price_total}</td>
+                    <td className="px-6 py-4">{ord.discount_id}</td>
+                    <td className="px-6 py-4">{ord.final_price}</td>
+                    <td className="px-6 py-4">{ord.transaction_id}</td>
+                    <td className="px-6 py-4">{ord.payment_type}</td>
+                    <td className="px-6 py-4 text-indigo-600 hover:text-indigo-900">
+                      <a href={`http://127.0.0.1:8000/${ord.image_payment}`}>
+                        View Image
+                      </a>
+                    </td>
+                    <td className="px-6 py-4">{ord.status_payment}</td>
+                    <td className="px-6 py-4">{ord.shipment_address}</td>
+                    <td>
+                      <div className="flex flex-col gap-2">
+                        <button
+                          onClick={() => handleConfirm(ord.id)}
+                          className="bg-green-500 text-white w-20 mx-auto hover:bg-green-600 px-2 py-1 rounded-md"
+                        >
+                          Confirm
+                        </button>
+                        <button
+                          onClick={() => handleDecline(ord.id)}
+                          className="bg-red-500 text-white w-20 mx-auto hover:bg-red-600 px-2 py-1 rounded-md"
+                        >
+                          Decline
+                        </button>
+                      </div>
+                    </td>
+                  </tr>
+                ))}
+            </tbody>
+          </table>
+        </div>
       </div>
-      <Footer />
     </div>
   );
 }

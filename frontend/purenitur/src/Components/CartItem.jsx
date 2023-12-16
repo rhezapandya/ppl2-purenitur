@@ -1,6 +1,55 @@
 import React from "react";
+import axios from "axios";
 
-function CartItem({ image, name, price, qty }) {
+function CartItem({ image, name, price, qty, email, row_id }) {
+  const token = localStorage.getItem("token");
+
+  const increaseQty = async () => {
+    try {
+      const response = await axios.post(
+        "http://127.0.0.1:8000/api/cart/add-qty",
+        {
+          email: email,
+          rowId: row_id,
+        },
+        {
+          headers: {
+            Authorization: `Bearer ${token}`,
+          },
+        }
+      );
+      // Handle success - Update UI with increased quantity
+      console.log("Quantity Increased!", response.data);
+      location.reload();
+    } catch (error) {
+      // Handle error
+      console.error("Error increasing quantity:", error);
+    }
+  };
+
+  const decreaseQty = async () => {
+    try {
+      const response = await axios.post(
+        "http://127.0.0.1:8000/api/cart/dec-qty",
+        {
+          email: email,
+          rowId: row_id,
+        },
+        {
+          headers: {
+            Authorization: `Bearer ${token}`,
+          },
+        }
+      );
+      // Handle success - Update UI with decreased quantity
+      console.log("Quantity Decreased!", response.data);
+      location.reload();
+    } catch (error) {
+      // Handle error
+      console.error("Error decreasing quantity:", error);
+    }
+  };
+
   return (
     <div class="rounded-lg w-full">
       <div class="justify-between mb-6 rounded-lg bg-white p-6 shadow-md sm:flex sm:justify-start md:flex md:justify-start">
@@ -13,9 +62,14 @@ function CartItem({ image, name, price, qty }) {
           <div class="mt-3 sm:mt-0">
             <h2 class="text-lg font-bold text-gray-900 mr-4">{name}</h2>
           </div>
-          <div class="mt-2 flex justify-between sm:space-y-6 sm:mt-0 sm:block sm:space-x-6">
+          <div class="mt-2 flex justify-between sm:space-y-6 sm:mt-0 sm:block">
             <div class="flex items-center border-gray-100">
-              <form id="submits1">
+              <form
+                onSubmit={(e) => {
+                  e.preventDefault();
+                  decreaseQty();
+                }}
+              >
                 <input type="hidden" name="rowId" />
                 <button
                   type="submit"
@@ -27,7 +81,12 @@ function CartItem({ image, name, price, qty }) {
               <span class="h-8 w-8 border bg-white text-center text-xs outline-none p-2">
                 {qty}
               </span>
-              <form id="submits2">
+              <form
+                onSubmit={(e) => {
+                  e.preventDefault();
+                  increaseQty();
+                }}
+              >
                 <input type="hidden" />
                 <button
                   type="submit"
@@ -37,9 +96,7 @@ function CartItem({ image, name, price, qty }) {
                 </button>
               </form>
             </div>
-            <div class="flex items-center space-x-4">
-              <p class="mt-2 text-sm font-bold">Rp. {price}</p>
-            </div>
+            <p class="mt-2 text-sm font-bold">Rp. {price}</p>
           </div>
         </div>
       </div>

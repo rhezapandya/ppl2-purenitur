@@ -55,7 +55,6 @@ function Shipment() {
     }
   }, [userID]);
 
-  console.log(paymentData);
   return (
     <div className="min-h-screen">
       <Navbar />

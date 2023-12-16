@@ -69,9 +69,15 @@ function ShoppingCart() {
       let finalPriceValue = 0;
 
       cartData.forEach((item) => {
-        subTotalValue += parseFloat(item.price.replace(",", ""));
-        taxValue += parseFloat(item.tax.replace(",", ""));
-        finalPriceValue += parseFloat(item.subtotal.replace(",", ""));
+        const priceWithoutComma = parseFloat(item.price.replace(/,/g, ""));
+        const taxWithoutComma = parseFloat(item.tax.replace(/,/g, ""));
+        const subtotalWithoutComma = parseFloat(
+          item.subtotal.replace(/,/g, "")
+        );
+
+        subTotalValue += priceWithoutComma;
+        taxValue += taxWithoutComma;
+        finalPriceValue += subtotalWithoutComma;
       });
 
       setSubtotal(subTotalValue.toFixed(2));
@@ -163,6 +169,8 @@ function ShoppingCart() {
                       name={cart.name_product}
                       price={cart.price}
                       qty={cart.qty}
+                      email={userEmail}
+                      row_id={cart.rowId}
                     />
                   ))}
               </div>
@@ -196,7 +204,10 @@ function ShoppingCart() {
               </div>
             </div>
             <div className="mb-12">
-              <Carousel />
+              <div className="flex flex-col mt-4">
+                <div className="text-xl font-semibold">Rekomendasi Untukmu</div>
+                <Carousel />
+              </div>
             </div>
           </React.Fragment>
         ) : (
@@ -215,7 +226,10 @@ function ShoppingCart() {
               </Link>
             </div>
             <div className="mb-12">
-              <Carousel />
+              <div className="flex flex-col mt-4">
+                <div className="text-xl font-semibold">Rekomendasi Untukmu</div>
+                <Carousel />
+              </div>
             </div>
           </React.Fragment>
         )}

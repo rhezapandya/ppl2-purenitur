@@ -137,7 +137,6 @@ function EditProfile() {
     }
   };
 
-  console.log(userData);
   return (
     <div className="min-h-screen">
       <Navbar />

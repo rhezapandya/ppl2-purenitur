@@ -18,13 +18,20 @@ function formatTimestamp(timestamp) {
   return formattedDate;
 }
 
-function PaymentItem({ order_id, status, created_at }) {
+function PaymentItem({ order_id, status, created_at, cart, price }) {
   const formattedTimestamp = formatTimestamp(created_at);
   const token = localStorage.getItem("token");
   const [image, setImage] = useState(null);
   const [error, setError] = useState(null);
   const [currentStatus, setCurrentStatus] = useState(status);
   const navigate = useNavigate();
+
+  const parsedCart = JSON.parse(cart);
+
+  const items = Object.values(parsedCart).map((item) => ({
+    name_product: item.name_product,
+    qty: item.qty,
+  }));
 
   const handleImageChange = (event) => {
     const selectedImage = event.target.files[0];
@@ -91,15 +98,30 @@ function PaymentItem({ order_id, status, created_at }) {
               ORDER ID : PRNTR-ORD-{order_id}
             </div>
           </div>
+          {items.map((item, index) => (
+            <div
+              key={index}
+              className="flex flex-row mt-2 items-center space-x-4 justify-between"
+            >
+              <div className="text-base">{item.name_product}</div>
+              <div className="text-base">x{item.qty}</div>
+            </div>
+          ))}
+          <div className="flex flex-row mt-2 items-center space-x-4 justify-between">
+            <div className="text-base font-semibold">
+              Jumlah yang Harus Dibayar
+            </div>
+            <div className="text-base font-semibold">Rp. {price}</div>
+          </div>
           <div className="flex items-center space-x-4">
-            <div className="text-lg mt-2 font-bold">
+            <div className="text-lg mt-8 font-bold">
               Status Pembayaran : {status}
             </div>
           </div>
-          {currentStatus === "WAITING FOR CONFIRMATION" ? (
+          {currentStatus === "WAITING FOR CONFIRMATION" && (
             <React.Fragment>
               <div className="flex items-center space-x-4">
-                <div className="mt-4 text-base">
+                <div className="mt-2 text-base">
                   Bukti Pembayaran Sudah di Upload
                 </div>
               </div>
@@ -115,10 +137,62 @@ function PaymentItem({ order_id, status, created_at }) {
                 Go to Shipment
               </button>
             </React.Fragment>
-          ) : (
+          )}
+          {currentStatus === "CONFIRMED" && (
             <React.Fragment>
               <div className="flex items-center space-x-4">
-                <div className="mt-4 text-base">
+                <div className="mt-2 text-base">
+                  Bukti Pembayaran Sudah di Upload
+                </div>
+              </div>
+              <div className="flex items-center space-x-4">
+                <div className="mt-2 text-base">
+                  Transaction ID : PRNTR-TR-{order_id}
+                </div>
+              </div>
+              <button
+                className="self-end mt-5 rounded-md bg-teal-400 hover:bg-teal-500 py-2.5 font-semibold px-8 text-sm text-white"
+                onClick={() => navigate("/shipment")}
+              >
+                Go to Shipment
+              </button>
+            </React.Fragment>
+          )}
+          {currentStatus === "WAITING FOR PAYMENT" && (
+            <React.Fragment>
+              <div className="flex items-center space-x-4">
+                <div className="mt-2 text-base">
+                  Lakukan pembayaran dalam 24 jam dari {formattedTimestamp}
+                </div>
+              </div>
+              <div className="flex items-center space-x-4">
+                <div className="mt-2 text-base">Upload Bukti Pembayaran</div>
+              </div>
+              <div className="flex items-center space-x-4">
+                <input
+                  className="w-full mt-2 text-sm text-gray-900 border border-gray-300 rounded-lg cursor-pointer bg-gray-50 placeholder-red-400"
+                  id="file_input"
+                  type="file"
+                  onChange={handleImageChange}
+                  accept=".jpg,.jpeg,.png,.jfif,.pdf"
+                />
+              </div>
+              {error && <p className="text-red-500">{error}</p>}
+              <button
+                onClick={handleSubmit}
+                disabled={!image}
+                className={`self-end mt-5 rounded-md ${
+                  !image ? "bg-teal-300" : "bg-teal-400 hover:bg-teal-500"
+                } py-2.5 font-semibold px-8 text-sm text-white`}
+              >
+                Upload
+              </button>
+            </React.Fragment>
+          )}
+          {currentStatus === "FAILED" && (
+            <React.Fragment>
+              <div className="flex items-center space-x-4">
+                <div className="mt-2 text-base">
                   Lakukan pembayaran dalam 24 jam dari {formattedTimestamp}
                 </div>
               </div>

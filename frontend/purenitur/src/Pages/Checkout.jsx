@@ -101,9 +101,15 @@ function Checkout() {
       let finalPriceValue = 0;
 
       cartData.forEach((item) => {
-        subTotalValue += parseFloat(item.price.replace(",", ""));
-        taxValue += parseFloat(item.tax.replace(",", ""));
-        finalPriceValue += parseFloat(item.subtotal.replace(",", ""));
+        const priceWithoutComma = parseFloat(item.price.replace(/,/g, ""));
+        const taxWithoutComma = parseFloat(item.tax.replace(/,/g, ""));
+        const subtotalWithoutComma = parseFloat(
+          item.subtotal.replace(/,/g, "")
+        );
+
+        subTotalValue += priceWithoutComma;
+        taxValue += taxWithoutComma;
+        finalPriceValue += subtotalWithoutComma;
       });
 
       setSubtotal(subTotalValue.toFixed(2));

@@ -53,7 +53,6 @@ function Payment() {
     }
   }, [userID]);
 
-  console.log(paymentData);
   return (
     <div className="min-h-screen">
       <Navbar />
@@ -130,6 +129,8 @@ function Payment() {
                     order_id={payment.id}
                     status={payment.status_payment}
                     created_at={payment.created_at}
+                    cart={payment.cart}
+                    price={payment.final_price}
                   />
                 ))}
             </div>

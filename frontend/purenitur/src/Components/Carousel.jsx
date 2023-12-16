@@ -40,7 +40,7 @@ const Carousel = () => {
   const [products, setProducts] = useState([]);
 
   const client = axios.create({
-    baseURL: "https://api.pureniture.shop/api/catalog",
+    baseURL: "http://127.0.0.1:8000/api/catalog",
   });
 
   useEffect(() => {
@@ -52,7 +52,7 @@ const Carousel = () => {
       const shuffledProducts = allProducts.sort(() => 0.5 - Math.random());
 
       // Get the first 15 products (or fewer if the API returns less than 15)
-      const selectedProducts = shuffledProducts.slice(0, 15);
+      const selectedProducts = shuffledProducts.slice(0, 5);
 
       // Set the selected products in state
       setProducts(selectedProducts);
@@ -60,23 +60,21 @@ const Carousel = () => {
   }, []);
 
   return (
-    <div className="container mx-auto">
-      <Slider {...settings}>
-        {products &&
-          products.map((product) => (
-            <div className="p-4" key={product.id}>
-              <Card
-                name={product.name_product}
-                id={product.id}
-                category={product.category}
-                price={product.price}
-                image={product.image}
-                rating={product.rating}
-                sold={product.sold}
-              />
-            </div>
-          ))}
-      </Slider>
+    <div className="flex flex-row justify-center">
+      {products &&
+        products.map((product) => (
+          <div className="p-4" key={product.id}>
+            <Card
+              name={product.name_product}
+              id={product.id}
+              category={product.category}
+              price={product.price}
+              image={product.image}
+              rating={product.rating}
+              sold={product.sold}
+            />
+          </div>
+        ))}
     </div>
   );
 };

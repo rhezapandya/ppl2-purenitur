@@ -39,7 +39,6 @@ function ProductDetail() {
           },
         })
         .then((response) => {
-          console.log(response);
           setUserEmail(response.data.users.email);
         })
         .catch((error) => {
