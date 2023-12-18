@@ -36,8 +36,6 @@
 - Tidak ada hambatan utama yang dihadapi.
 
 ### Notes Sprint Review
-- Tidak semua tujuan yang direncanakan berhasil dicapai selama sprint.
 - Pembuatan halaman catalog selesai.
 - Tidak ada hambatan yang dilaporkan, menunjukkan alur kerja yang lancar dalam tim.
 - Seluruh tim diharapkan mempertahankan kinerja positif ini pada sprint berikutnya.
-- Tim akan melanjutkan tugas yang tidak selesai ke sprint berikutnya, dengan penyesuaian yang diperlukan pada rencana.
